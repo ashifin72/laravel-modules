@@ -1,0 +1,178 @@
+Инструкция и команды для разворачивания проекта.
+
+1.  Ставим композер в проект 4 команды
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === 'e0012edf3e80b6978849f5eff0d4b4e4c79ff1609dd1e613307e16318854d24ae64f26d17af3ef0bf7cfb710ca74755a') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+ Можно прописать путь к композеру в PHPstorm
+
+2. ставим  Laravel  с указанием версии
+
+  последняя версия
+composer create-project --prefer-dist laravel/laravel blogcreated_at
+
+ kexit cnfdbnm xthtp rjvgjpth Jgtycthdthf
+
+3. Установим "базовые" пакеты: laravel-ide-helper, laravel-debugbar;
+composer require --dev barryvdh/laravel-ide-helper
+
+composer  require barryvdh/laravel-debugbar --dev
+
+
+
+Регистрация пакета в файле  config/app.php в секции providers:
+
+Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+Для автоматического обновление документации при обновлении зависимостей проекта - пропишите команду генерации в секцию post-update-cmd файла composer.json:
+
+
+ кеопрруем  файл ide-helper.php в config
+  в нем 28 строка 'include_fluent' => true,
+   после генериуем
+   php artisan ide-helper:generate
+
+   Очистка кеша php artisan route:clear
+
+4.1 Аунтификация в отдельном файле admin
+4. Подключаем БД и создаем модели + миграции
+
+ Создаем моодели и миграции в модулях
+php artisan module:make-model Post Article -m
+php artisan module:make-model Category Article -m
+
+php artisan make:model Post -m
+php artisan make:model Models/Admin/MenuItem -m
+php artisan make:model Models/Admin/Section -m
+php artisan make:model Models/Admin/SectionItem -m
+php artisan make:model /Admin/Info -m
+
+php artisan make:model Role -m
+php artisan make:model UserRole -m
+php artisan make:model locale -m
+
+
+php artisan make:model Models/Admin/BlogCategory -m
+php artisan make:model Models/Admin/BlogPost -m
+php artisan make:model Models/Admin/Comment -m
+php artisan make:model Models/Admin/Filter -m
+php artisan make:model Models/Admin/Portfolio -m
+
+php artisan make:model Models/Admin/Feedback -m
+ зразу  подключаем метатеги
+php composer.phar require fomvasss/laravel-meta-tags
+s  config/app.php
+'MetaTag' => Fomvasss\LaravelMetaTags\Facade::class,
+ Отдельно миграции
+ php artisan make:migration create_user_roles_table --create=user_roles
+ php artisan make:migration create_portfolios_table --create=portfolios
+
+  Миграции для редактирования таблиц. Добавляем связи
+  php artisan make:migration chahde_info_table --table=infos
+  php artisan make:migration chahde_home_page_drop_table --table=home_pages
+  php artisan make:migration chahde_faqs_del_table --table=faqs
+  php artisan make:migration chahde_infos_hesd_img_table --table=infos
+  php artisan make:migration chahde_sliders_sort_table --table=sliders
+  php artisan make:migration chahde_locales_table --table=locales
+  php artisan make:migration chahde_whies_table --table=whies
+  php artisan make:migration chahde_home_title_count_table --table=homes
+  php artisan make:migration chahde_whies_sort_table --table=why
+  php artisan make:migration chahde_item_section --table=section_items
+  php artisan make:migration chahde_filter_price_table --table=filters
+  php artisan make:migration chahde_infos_table --table=infos
+  php artisan make:migration chahde_feedback_local_table --table=feedback
+  php artisan make:migration chahde_blog_posts_local_table --table=blog_posts
+
+
+
+5.  Заполняем миграции создаем структуру таблиц
+6. Выполняем миграции
+php artisan migrate
+ 7. Создаем сиды
+
+ php artisan make:seeder LocaleTableSeeder
+ php artisan make:seeder MenuTableSeeder
+ php artisan make:seeder InfoTableSeeder
+ php artisan make:seeder FaqTableSeeder
+ php artisan make:seeder BlogCategoriesSeeder
+ php artisan make:seeder FilterSeeder
+ php artisan make:seeder PortfolioSeeder
+ php artisan make:seeder SectionTableSeeder
+ php artisan make:seeder TypeTableSeeder
+ php artisan make:seeder CommentTableSeeder
+ php artisan make:seeder FeedbackTableSeeder
+ php artisan make:seeder MenuItemTableSeeder
+
+12.  Делаем посев
+php artisan db:seed
+для отдельной таблицы
+php artisan db:seed --class-BlogPostFactory
+php artisan db:seed --class-BlogCategoriesTableSeeder
+
+ или если были изменения рефреш
+ composer dump-autoload
+ php artisan migrate:refresh --seed
+
+ если нужно ещё накатить тестовые данные, то юзаем ключ --seed:
+ `php artisan migrate:fresh --seed` - удаляет все таблицы, накатывает миграции и заполняет тестовыми данными.
+
+
+13.  Создаем первый контролер RestTestController
+
+php artisan make:controller RestTestController --resource
+
+14.  создаем контроллеры
+ базовый
+php artisan make:controller BaseController
+для вывода постов
+php artisan make:controller Site/Front/PostController --resource
+php artisan make:controller Site/Front/HomeController
+php artisan make:controller Site/Front/SectionController
+php artisan make:controller Site/Front/PortfolioController --resource
+php artisan make:controller Site/Front/PortfolioFilterController --resource
+php artisan make:controller Site/Front/PostCategoryController --resource
+
+Аутентификация  Установка фронтенда из коробки
+composer require laravel/ui
+php artisan ui vue --auth
+
+Сброс кеша
+php artisan route:clear
+php artisan view:clear
+php artisan cache:clear
+php artisan config:clear
+php artisan config:cache
+
+  Созаем аунтификацию
+   Переносим  модель User в папку Models
+
+
+
+15. создаем контроллер  категорий
+php artisan make:controller Blog/Admin/CategoryController --resource
+16/  прописываем маржруты
+
+ распечатать мартшруты
+php artisan route:list > routes.txt
+
+для контроллера постов
+php artisan make:controller Blog/Admin/PostController -r
+
+ Создание реквеста
+php artisan make:request PorfolioRequest
+
+Создаем observer
+php artisan make:observer BlogPostObserver --model=Models\Admin\BlogPost
+php artisan make:observer BlogCategoryObserver --model=Models\Admin\BlogCategory
+
+ Создаем коллекции контроллер
+
+ php artisan make:controller DiggingDeeperController
+
+ Обновление после правки composer.json
+ php composer.phar update
+
+
+
+
+

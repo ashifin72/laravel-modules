@@ -1,0 +1,18 @@
+ создаем метод
+ // переключение языка админки
+     public function changeLocale($locale)
+     {
+         session(['Lacale'=> $locale]);
+         \App::setLocale($locale);
+
+         return redirect()->back();
+ }
+  и роут
+  Route::get('locale/{locale}', 'Site\Admin\LocaleController@changeLocale')->name('locale');
+
+   создавем  миделвеер
+   php artisan make:middleware SetLocale
+
+   для бека
+   php artisan make:middleware LocaleMiddleware
+

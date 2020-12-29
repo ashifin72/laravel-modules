@@ -1,0 +1,75 @@
+Создание категории и т.п..
+
+
+1.  Создаем ресурсный контроллер
+
+Сброс кеша
+php artisan route:clear
+php artisan view:clear
+php artisan cache:clear
+php artisan config:clear
+php artisan config:cache
+
+ создаем контроллер  категорий
+php artisan make:controller Site/Admin/LocaleController --resource
+php artisan make:controller Site/Admin/MenuController --resource
+php artisan make:controller Site/Admin/MenuItemController --resource
+php artisan make:controller Site/Admin/SectionController --resource
+php artisan make:controller Site/Admin/SectionItemController --resource
+php artisan make:controller Site/Admin/UserController --resource
+php artisan make:controller Site/Admin/InfoController --resource
+php artisan make:controller Site/Admin/AdvantageController --resource
+php artisan make:controller Site/Admin/BlogPostController --resource
+php artisan make:controller Site/Admin/BlogCategoryController --resource
+php artisan make:controller Site/Admin/CommentController --resource
+php artisan make:controller Site/Admin/FeedbackController --resource
+php artisan make:controller Site/Admin/FilterController --resource
+php artisan make:controller Site/Admin/PortfolioController --resource
+
+2  прописываем маршруты добавляем в группу
+Route::resource('local', 'LocaleController')
+            ->except('show')
+            ->names('site.admin.local');
+
+ распечатать мартшруты
+php artisan route:list > routes.txt
+
+для контроллера постов
+php artisan make:controller Blog/Admin/PostController -r
+
+ Создание реквеста
+php artisan make:request AdminUserCreateRequest
+php artisan make:request InfoUpdateRequest
+php artisan make:request HomeUpdateRequest
+php artisan make:request InfoUploadImgRequest
+php artisan make:request LocaleGreateRequest
+php artisan make:request LocaleUpdateRequest
+php artisan make:request SectionGreateRequest
+php artisan make:request SectionUpdateeRequest
+php artisan make:request ImgUpdateRequest
+php artisan make:request FilterGreateRequest
+php artisan make:request FeedbackUpdateRequest
+php artisan make:request FilterGreateRequest
+
+Создаем observer
+php artisan make:observer BlogPostObserver --model=Models\BlogPost
+php artisan make:observer FilterObserver --model=Models\Admin\Filter
+php artisan make:observer PortfolioObserver --model=Models\Admin\Portfolio
+php artisan make:observer BlogCategoryObserver --model=Models\BlogCategory
+
+  прописываем их в AppServiceProvider
+
+  BlogPost::observe(BlogPostObserver::class);
+  BlogCategory::observe(BlogCategoryObserver::class);
+
+ Создаем коллекции контроллер
+
+ php artisan make:controller DiggingDeeperController
+
+ Обновление после правки composer.json
+ php composer.phar update
+
+
+
+
+

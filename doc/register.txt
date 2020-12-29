@@ -1,0 +1,78 @@
+Создание регистрациии и аунтификации
+
+1.Аутентификация  Установка фронтенда из коробки
+ Можно сначала скинуть
+ php composer.phar dump-autoload
+  затем команды
+php composer.phar require laravel/ui
+ php artisan ui vue --auth
+2.  создаем модели  ролей и пользователей
+php artisan make:model Models/Role
+php artisan make:model Models/UserRole
+  Прописываем в них поля $fillable
+   в основной мадели User  добавляем методы  аунтификации для каждой роли
+
+php artisan make:model Models/Admin/User
+ этой модели добавляем поля и связываем с таблицей Role
+
+3.  создаем middleware для  проверки статуса
+php artisan make:middleware CheckStatus
+
+подключаем его в Kernel в $routeMiddleware
+'status'=> \App\Http\Middleware\CheckStatus::class,
+
+4. Создаем  контроллеры
+ php artisan make:controller Site/BaseController
+ php artisan make:controller Site/Admin/AdminBaseController
+ оба делаем абстрактными и второй наследует первый.
+ в админском в контруекторе прописываем проверму middleware
+ public function __construct()
+     {
+         $this->middleware('auth');
+         $this->middleware('status');
+     }
+
+ 5. Создаем или подправлюяем вьюхи для админки
+  6,  Подправляем файл RegisterController  путь к модели User
+    и переписываем метод  create  учетом получения ролей
+     Так  же правим путь в config/auth.php
+
+7.  Создаем  контроллер админки
+ php artisan make:controller Site/Admin/MainController
+
+ 8. Прописываем роуты для админки
+ Route::group(['middleware' =>['status', 'auth']], function (){
+     $groupeData = [
+         'namespace' => 'Site\Admin',
+         'prefix' => 'admin',
+     ];
+     Route::group($groupeData, function () {
+         Route::resource('index', 'MainController')
+             ->names('site.admin.index');
+     });
+ });
+ 8.2  Провим RegisterController.php   к модели User
+   и метод
+   protected function create(array $data)
+       {
+           $user = User::create([
+               'name' => $data['name'],
+               'email' => $data['email'],
+               'password' => Hash::make($data['password']),
+           ]);
+           // вставляем в таблицу user_roles  id  yjdjuj gjkmpjdfntkz
+           \DB::table('user_roles')->insert([
+               'user_id'=>$user->id,
+           ]);
+           return $user;
+       }
+
+9.  создаем ресурсные контроллры
+php artisan make:controller Blog/User/MainController -r
+php artisan make:controller Blog/Disabled/MainController -r
+
+ добавлянм матрщрут для панели юзеров
+ Route::get('user/index', 'Blog\User\MainController@index');
+
+ Распечатываем мартшруты
+ php artisan route:list > routes.txt

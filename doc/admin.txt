@@ -1,0 +1,75 @@
+Настройка админки.
+Зодаем аунтификацию
+
+composer require laravel/ui
+
+php artisan ui vue --auth
+
+npm install && npm run dev
+
+сщздаем миграции с доп моделями
+php artisan make:model Role -m
+php artisan make:model Permission -m
+ в миграции добавляем
+ ______
+ $table->string('name');
+ $table->string('slug');
+ ____________
+ соеденяем таблицы
+ php artisan make:migration create_users_permissions_table
+
+ php artisan make:migration create_users_roles_table
+
+ php artisan make:migration create_roles_permissions_table
+
+ Проводим миграции
+ php artisan migrate
+  создаем трейт-код берем из заготовки
+
+  https://laravel.demiart.ru/guide-to-roles-and-permissions/
+
+  @role('project-manager')
+   Project Manager Panel
+  @endrole
+  @role('web-developer')
+   Web Developer Panel
+  @endrole
+
+  //вернёт true для текущего пользователя, если ему дано право управлять пользователями
+  Gate::allows('manage-users');
+
+ Закидываем  дистрибутив в паблик  и сoздаем  app_admin.blade.php в  layouts
+ Работаем с весрткой  распределяем по секциям
+
+
+
+
+
+ 2. Подключаем метатеги https://github.com/fomvasss/laravel-meta-tags
+ composer require fomvasss/laravel-meta-tags
+
+ 3. Создаем контроллерыв и к ним репозитории
+
+  php artisan make:controller BaseController
+  php artisan make:controller Admin\AdminBaseController
+  php artisan make:controller Admin\AdminHomeController
+  php artisan make:controller Site\Admin\BlogCategoryController -r
+  php artisan make:controller Site\Admin\BlogPostController -r
+  php artisan make:controller Site\Admin\CommentController -r
+  php artisan make:controller Site\Admin\FaqController -r
+  php artisan make:controller Site\Admin\FilterController -r
+  php artisan make:controller Site\Admin\InfoController -r
+  php artisan make:controller Site\Admin\MenuController -r
+  php artisan make:controller Site\Admin\LocaleController -r
+  php artisan make:controller Site\Admin\PortfolioController -r
+  php artisan make:controller Site\Admin\SliderController -r
+  php artisan make:controller Site\Admin\AdminUserController -r
+
+
+   Репозитории  создаем в каталоге app/Repositories
+    в нем создаем CoreRepository.php и от него наследуем остальные
+
+
+  4. Создание реквеста
+     php artisan make:request MenuCreateRequest
+     php artisan make:request MenuUpdateRequest
