@@ -11,6 +11,18 @@
 |
 */
 
-Route::prefix('article')->group(function() {
-    Route::get('/', 'ArticleController@index');
+//Route::prefix('article')->group(function() {
+//    Route::get('/', 'ArticleController@index');
+//});
+Route::group(['middleware' => ['role:admin', 'auth']], function() {    // Admin
+
+
+    Route::prefix('admin')->group(function (){
+        Route::resource('category', 'AdminCategoryController')
+            ->except('show')
+            ->names('admin.categories');
+        Route::resource('post', 'AdminPostController')
+            ->except('show')
+            ->names('admin.posts');
+    });
 });

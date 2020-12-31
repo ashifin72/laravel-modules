@@ -6,7 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class ArticleController extends Controller
+class FrontCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.

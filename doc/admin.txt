@@ -31,7 +31,7 @@ php artisan make:model Permission -m
   @role('project-manager')
    Project Manager Panel
   @endrole
-  @role('web-developer')
+  @role('admin')
    Web Developer Panel
   @endrole
 
@@ -53,6 +53,7 @@ php artisan make:model Permission -m
   php artisan make:controller BaseController
   php artisan make:controller Admin\AdminBaseController
   php artisan make:controller Admin\AdminHomeController
+  php artisan make:controller Admin\UserController
   php artisan make:controller Site\Admin\BlogCategoryController -r
   php artisan make:controller Site\Admin\BlogPostController -r
   php artisan make:controller Site\Admin\CommentController -r

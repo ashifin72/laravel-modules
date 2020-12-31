@@ -17,21 +17,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['middleware' => 'role:web-developer'], function() {
-    Route::get('/dashboard', function() {
-        return 'Добро пожаловать, Веб-разработчик';
-    });
-});
 
-// Admin
-$groupData = ['namespace'=> 'App\Http\Controllers\Admin','prefix'=> 'admin'];
-
-Route::group($groupData, function (){
-    Route::resource('/', 'AdminHomeController')
-        ->only('index')
-        ->names('admin.index');
-});
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::group(['middleware' => ['role:admin', 'auth']], function() {
+    // Admin
+    $groupData = ['namespace'=> 'App\Http\Controllers\Admin','prefix'=> 'admin'];
+
+    Route::group($groupData, function (){
+        Route::get('/', 'AdminHomeController@index')->name('admin.index');
+        Route::resource('users', 'UserController')
+            ->except('show')
+            ->names('admin.users');
+    });
+});

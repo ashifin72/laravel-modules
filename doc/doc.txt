@@ -35,53 +35,51 @@ Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
    Очистка кеша php artisan route:clear
 
 4.1 Аунтификация в отдельном файле admin
-4. Подключаем БД и создаем модели + миграции
+4,2  Создаем модули
+php artisan module:make Artikle
+php artisan module:make Shop
+php artisan module:make Comment Tag Menu Portfolio Section
+4.3Подключаем БД и создаем модели + миграции
+
 
  Создаем моодели и миграции в модулях
 php artisan module:make-model Post Article -m
 php artisan module:make-model Category Article -m
 
-php artisan make:model Post -m
-php artisan make:model Models/Admin/MenuItem -m
-php artisan make:model Models/Admin/Section -m
-php artisan make:model Models/Admin/SectionItem -m
-php artisan make:model /Admin/Info -m
+php artisan module:make-model Tag Tag -m
+php artisan module:make-migration create_post_tag_table Tag
 
-php artisan make:model Role -m
-php artisan make:model UserRole -m
+php artisan module:make-model Comment Comment -m
+
+php artisan module:make-model Menu Menu -m
+php artisan module:make-model MenuItem Menu -m
+
+php artisan module:make-model Section Section -m
+php artisan module:make-model SectionItem Section -m
+
+php artisan module:make-model Portfolio Portfolio -m
+php artisan module:make-model PortfolioCategory Portfolio -m
+php artisan module:make-model PortfolioFeedback Portfolio -m
+
+
 php artisan make:model locale -m
+php artisan make:model Info -m
 
-
-php artisan make:model Models/Admin/BlogCategory -m
-php artisan make:model Models/Admin/BlogPost -m
-php artisan make:model Models/Admin/Comment -m
-php artisan make:model Models/Admin/Filter -m
-php artisan make:model Models/Admin/Portfolio -m
-
-php artisan make:model Models/Admin/Feedback -m
  зразу  подключаем метатеги
 php composer.phar require fomvasss/laravel-meta-tags
 s  config/app.php
 'MetaTag' => Fomvasss\LaravelMetaTags\Facade::class,
+
+
+
+
  Отдельно миграции
  php artisan make:migration create_user_roles_table --create=user_roles
  php artisan make:migration create_portfolios_table --create=portfolios
 
   Миграции для редактирования таблиц. Добавляем связи
   php artisan make:migration chahde_info_table --table=infos
-  php artisan make:migration chahde_home_page_drop_table --table=home_pages
-  php artisan make:migration chahde_faqs_del_table --table=faqs
-  php artisan make:migration chahde_infos_hesd_img_table --table=infos
-  php artisan make:migration chahde_sliders_sort_table --table=sliders
-  php artisan make:migration chahde_locales_table --table=locales
-  php artisan make:migration chahde_whies_table --table=whies
-  php artisan make:migration chahde_home_title_count_table --table=homes
-  php artisan make:migration chahde_whies_sort_table --table=why
-  php artisan make:migration chahde_item_section --table=section_items
-  php artisan make:migration chahde_filter_price_table --table=filters
-  php artisan make:migration chahde_infos_table --table=infos
-  php artisan make:migration chahde_feedback_local_table --table=feedback
-  php artisan make:migration chahde_blog_posts_local_table --table=blog_posts
+
 
 
 
@@ -90,24 +88,18 @@ s  config/app.php
 php artisan migrate
  7. Создаем сиды
 
- php artisan make:seeder LocaleTableSeeder
- php artisan make:seeder MenuTableSeeder
+ php artisan make:seeder LocaleSeeder
  php artisan make:seeder InfoTableSeeder
- php artisan make:seeder FaqTableSeeder
- php artisan make:seeder BlogCategoriesSeeder
- php artisan make:seeder FilterSeeder
- php artisan make:seeder PortfolioSeeder
- php artisan make:seeder SectionTableSeeder
- php artisan make:seeder TypeTableSeeder
- php artisan make:seeder CommentTableSeeder
- php artisan make:seeder FeedbackTableSeeder
- php artisan make:seeder MenuItemTableSeeder
+
+php artisan module:make-seeder BlogPost Article
+
 
 12.  Делаем посев
 php artisan db:seed
 для отдельной таблицы
 php artisan db:seed --class-BlogPostFactory
 php artisan db:seed --class-BlogCategoriesTableSeeder
+php artisan db:seed --class-LocaleSeeder
 
  или если были изменения рефреш
  composer dump-autoload
@@ -124,12 +116,19 @@ php artisan make:controller RestTestController --resource
 14.  создаем контроллеры
  базовый
 php artisan make:controller BaseController
+
+php artisan make:controller Admin/LocaleController
 для вывода постов
-php artisan make:controller Site/Front/PostController --resource
-php artisan make:controller Site/Front/HomeController
-php artisan make:controller Site/Front/SectionController
-php artisan make:controller Site/Front/PortfolioController --resource
-php artisan make:controller Site/Front/PortfolioFilterController --resource
+
+php artisan module:make-controller FrontPostsController Article
+php artisan module:make-controller AdminPostsController Article
+php artisan module:make-controller AdminCategoryController Article
+php artisan module:make-controller FrontCategoryController Article
+
+php artisan module:make-controller AdminCommentsController Comment
+php artisan module:make-controller FrontCommentsController Comment
+
+
 php artisan make:controller Site/Front/PostCategoryController --resource
 
 Аутентификация  Установка фронтенда из коробки
@@ -146,11 +145,6 @@ php artisan config:cache
   Созаем аунтификацию
    Переносим  модель User в папку Models
 
-
-
-15. создаем контроллер  категорий
-php artisan make:controller Blog/Admin/CategoryController --resource
-16/  прописываем маржруты
 
  распечатать мартшруты
 php artisan route:list > routes.txt

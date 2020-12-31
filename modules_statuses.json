@@ -1,3 +1,9 @@
 {
-    "Article": true
+    "Article": true,
+    "Comment": true,
+    "Tag": true,
+    "Menu": true,
+    "Portfolio": true,
+    "Section": true,
+    "Shop": true
 }

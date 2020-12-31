@@ -18,9 +18,17 @@ class RoleSeeder extends Seeder
         $manager->name = 'Project Manager';
         $manager->slug = 'project-manager';
         $manager->save();
+        $user = new Role;
+        $user->name = 'User';
+        $user->slug = 'user';
+        $user->save();
+        $disabled = new Role;
+        $disabled->name = 'Disabled';
+        $disabled->slug = 'disabled';
+        $disabled->save();
         $developer = new Role();
-        $developer->name = 'Web Developer';
-        $developer->slug = 'web-developer';
+        $developer->name = 'Admin';
+        $developer->slug = 'admin';
         $developer->save();
     }
 }

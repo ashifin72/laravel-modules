@@ -25,7 +25,7 @@ trait HasRolesAndPermissions
     /**
      * @param mixed ...$roles
      * @return bool
-     * есть ли у текущего залогиненного Пользователя Роль
+     * есть ли у текущего залогиненного!!! Пользователя Роль
      */
     public function hasRole(... $roles ) {
         foreach ($roles as $role) {
@@ -40,6 +40,7 @@ trait HasRolesAndPermissions
      * @param $permission
      * @return bool
      * Для проверки прав доступа текущего пользователя
+     * Сначала определяем есть ли права у пользователя
      */
     public function hasPermission($permission)
     {
@@ -49,6 +50,8 @@ trait HasRolesAndPermissions
     /**
      * @param $permission
      * @return bool
+     * есть ли у Пользователя Права напрямую или через Роль
+     *  если есть права или роль правами то возвращаем true
      */
 
     public function hasPermissionTo($permission)
@@ -59,7 +62,7 @@ trait HasRolesAndPermissions
     /**
      * @param $permission
      * @return bool
-     * проверяет, привязана ли Роль с Правами к Пользователю
+     * проверяет, есть ли у Пользователя Права через его Роль.
      */
     public function hasPermissionThroughRole($permission)
     {
