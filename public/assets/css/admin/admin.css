@@ -1,0 +1,12 @@
+.breadcrumb {
+  background-color: #ffffff;
+  display: none;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  display: inline-block;
+  padding-right: 0.5rem;
+  color: #6c757d;
+  content: "*";
+}
+

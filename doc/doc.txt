@@ -98,6 +98,7 @@ php artisan module:make-seeder BlogPost Article
 php artisan db:seed
 для отдельной таблицы
 php artisan db:seed --class-BlogPostFactory
+php artisan db:seed --class-LocaleSeeder
 php artisan db:seed --class-BlogCategoriesTableSeeder
 php artisan db:seed --class-LocaleSeeder
 
@@ -129,7 +130,7 @@ php artisan module:make-controller AdminCommentsController Comment
 php artisan module:make-controller FrontCommentsController Comment
 
 
-php artisan make:controller Site/Front/PostCategoryController --resource
+php artisan make:controller Admin/InfoController --resource
 
 Аутентификация  Установка фронтенда из коробки
 composer require laravel/ui

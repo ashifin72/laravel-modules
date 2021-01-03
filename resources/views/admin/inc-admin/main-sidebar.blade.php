@@ -22,38 +22,36 @@
                 <a href="#" class="d-block">{{ Auth::user()->name }}</a>
             </div>
         </div>
-
-        <!-- Sidebar Menu -->
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-{{--                <li class="nav-item">--}}
-{{--                    <a href="{{ route('admin.info.edit', 1) }}" class="nav-link">--}}
-{{--                        <i class="nav-icon  fas fa-info-circle text-danger"></i>--}}
-{{--                        <p>--}}
-{{--                            {{__('admin.info')}}--}}
-{{--                        </p>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
+                <li class="nav-item">
+                    <a href="{{ route('admin.info.edit', 1) }}" class="nav-link">
+                        <i class="nav-icon  fas fa-info-circle text-danger"></i>
+                        <p>
+                            {{__('admin.info')}}
+                        </p>
+                    </a>
+                </li>
 
-{{--                <li class="nav-item">--}}
-{{--                    <a href="{{ route('admin.local.index') }}" class="nav-link">--}}
-{{--                        <i class="nav-icon fas fa-globe-africa"></i>--}}
-{{--                        <p>--}}
-{{--                            {{__('admin.locales')}}--}}
+                <li class="nav-item">
+                    <a href="{{ route('admin.locales.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-globe-africa"></i>
+                        <p>
+                            {{__('admin.locales')}}
 
-{{--                        </p>--}}
-{{--                    </a>--}}
+                        </p>
+                    </a>
 
-{{--                </li>--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a href="{{route('admin.menu.index')}}" class="nav-link">--}}
-{{--                        <i class="nav-icon fas fa-bars"></i>--}}
-{{--                        <p>--}}
-{{--                            {{__('admin.menus_site')}}--}}
-{{--                        </p>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.menus.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-bars"></i>
+                        <p>
+                            {{__('admin.menus_site')}}
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-bars"></i>

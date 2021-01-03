@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Site\Admin\AdminBaseController;
+use App\Http\Controllers\Admin\AdminBaseController;
 use App\Http\Requests\LocalCreateRequest;
 use App\Http\Requests\LocalUpdateRequest;
-use App\Models\Admin\Locale;
+use App\Models\Locale;
 use App\Repositories\Admin\LocalRepository;
 use Illuminate\Http\Request;
+use MetaTag;
 
 class LocaleController extends AdminBaseController
 {
@@ -31,7 +32,7 @@ class LocaleController extends AdminBaseController
         $columns = ['id', 'name', 'local', 'sort', 'status', 'favorite'];
         $items = $this->localRepository->getAllWithPaginate(15, $columns);
         MetaTag::setTags(['title'=>'Локазизации сайта']);
-        return view('site.admin.local.index', compact('items'));
+        return view('admin.local.index', compact('items'));
     }
 
 
@@ -46,7 +47,7 @@ class LocaleController extends AdminBaseController
         $item = Locale::make();
         MetaTag::setTags(['title'=>'Добавить локализацию']);
         $locallist = $this->localRepository->getForComboBox();
-        return view('site.admin.local.create', compact('item', 'locallist'));
+        return view('admin.local.create', compact('item', 'locallist'));
     }
 
     /**
@@ -61,7 +62,7 @@ class LocaleController extends AdminBaseController
         $result = Locale::create($data);
 
         if ($result) {
-            return redirect()->route('site.admin.local.index')
+            return redirect()->route('admin.locales.index')
                 ->with(['success' => 'Успешное сохраненно!']);
         } else {
             return back()
@@ -88,7 +89,7 @@ class LocaleController extends AdminBaseController
             abort(404);
         }
 
-        return view('site.admin.local.edit', compact('item'));
+        return view('admin.local.edit', compact('item'));
     }
 
     /**
@@ -109,7 +110,7 @@ class LocaleController extends AdminBaseController
             ->fill($data)
             ->save();
         return $this->localRepository
-            ->resultRecording($result, 'site.admin.local.index', $item->id);
+            ->resultRecording($result, 'admin.locales.index', $item->id);
 
 
 

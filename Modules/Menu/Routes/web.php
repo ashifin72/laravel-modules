@@ -11,6 +11,13 @@
 |
 */
 
-Route::prefix('menu')->group(function() {
-    Route::get('/', 'MenuController@index');
+
+
+
+Route::prefix('admin')->group(function (){
+    Route::resource('menus', 'MenuController')
+        ->except('show')
+        ->names('admin.menus');
+
 });
+

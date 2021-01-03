@@ -72,7 +72,7 @@ class AdminCategoryController extends AdminBaseController
 
         $item = Category::create($data);
         return $this->blogCategoryRepository
-            ->resultRecording($item, 'admin..category.index');
+            ->resultRecording($item, 'admin.category.index');
     }
 
     public function edit($id)
@@ -108,7 +108,7 @@ class AdminCategoryController extends AdminBaseController
             ->save();
 
         return $this->blogCategoryRepository
-            ->resultRecording($result, 'admin..category.edit', $item->id);
+            ->resultRecording($result, 'admin.category.edit', $item->id);
     }
 
     public function destroy($id)

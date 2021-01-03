@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\locale;
+use DB;
 use Illuminate\Database\Seeder;
 
 class LocaleSeeder extends Seeder
@@ -14,23 +15,31 @@ class LocaleSeeder extends Seeder
      */
     public function run()
     {
-        $locale_uk = new Locale();
-        $locale_uk->local = 'uk';
-        $locale_uk->name = 'Українська';
-        $locale_uk->favorite = '1';
-        $locale_uk->status = '1';
-        $locale_uk->sort = 1;
-        $locale_ru = new Locale();
-        $locale_ru->local = 'ru';
-        $locale_ru->name = 'Русский';
-        $locale_ru->favorite = '1';
-        $locale_ru->status = '1';
-        $locale_ru->sort = 1;
-        $locale_en = new Locale();
-        $locale_en->local = 'en';
-        $locale_en->name = 'English';
-        $locale_en->favorite = '1';
-        $locale_en->status = '1';
-        $locale_en->sort = 1;
+        $data = [
+            [
+                'id' => '1',
+                'local' => 'uk',
+                'name' => 'Українська',
+                'favorite' => '1',
+                'status' => '1',
+
+            ],
+            [
+                'id' => '2',
+                'local' => 'ru',
+                'name' => 'Русский',
+                'favorite' => '0',
+                'status' => '1',
+            ],
+            [
+                'id' => '3',
+                'local' => 'en',
+                'name' => 'English',
+                'favorite' => '0',
+                'status' => '0',
+            ],
+
+        ];
+        DB::table('locales')->insert($data);
     }
 }

@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class locale extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'id',
+        'local',
+        'status',
+        'name',
+        'sort'
+    ];
 }

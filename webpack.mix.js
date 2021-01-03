@@ -17,7 +17,7 @@ mix.styles([
 ], 'public/assets/admin/css/adminlte.min.css');
 
 mix.sass('resources/sass/main.sass', 'public/css')
-    .sass('resources/sass/admin.sass', 'public/assets/css/admin');
+    .sass('resources/sass/admin.sass', 'public/assets/admin/css');
 
 mix.scripts([
     'resources/assets/admin/plugins/jquery/jquery.min.js',

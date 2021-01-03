@@ -76,7 +76,7 @@ class LocalRepository extends CoreRepository
             $startFavorite->save();
 
             return redirect()
-                ->route('site.admin.local.index')
+                ->route('admin.locales.index')
                 ->with(['success' => __('admin.favorite') . ' ' .$startFavorite->local ]);
 
         } else{

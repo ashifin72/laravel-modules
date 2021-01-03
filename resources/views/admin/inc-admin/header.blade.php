@@ -7,26 +7,26 @@
         <li class="nav-item d-none d-sm-inline-block">
             <a href="{{'/'}}" class="nav-link">{{__('admin.site')}}</a>
         </li>
-{{--        <li class="nav-item d-none d-sm-inline-block">--}}
-{{--            <a href="{{route('admin.users.edit', Auth::user()->id)}}" class="nav-link">{{__('admin.profile')}}</a>--}}
-{{--        </li>--}}
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="{{route('admin.users.edit', Auth::user()->id)}}" class="nav-link">{{__('admin.profile')}}</a>
+        </li>
 
-{{--        <li class="nav-item dropdown">--}}
-{{--            @php--}}
-{{--                $locale = \App::getLocale();--}}
+        <li class="nav-item dropdown">
+            @php
+                $locale = \App::getLocale();
 
-{{--            @endphp--}}
-{{--            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"--}}
-{{--               aria-haspopup="true" aria-expanded="false">--}}
-{{--                {{$locale}}--}}
-{{--            </a>--}}
-{{--            <div class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
-{{--                <a class="dropdown-item" href="{{route('locale', $loc ='uk')}}"--}}
-{{--                   @if($locale == $loc) style="display: none" @endif >uk</a>--}}
-{{--                <a class="dropdown-item" href="{{route('locale', $loc ='ru')}}"--}}
-{{--                   @if($locale == $loc) style="display: none" @endif >ru</a>--}}
-{{--            </div>--}}
-{{--        </li>--}}
+            @endphp
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                {{$locale}}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{route('locale', $loc ='uk')}}"
+                   @if($locale == $loc) style="display: none" @endif >uk</a>
+                <a class="dropdown-item" href="{{route('locale', $loc ='ru')}}"
+                   @if($locale == $loc) style="display: none" @endif >ru</a>
+            </div>
+        </li>
 
     </ul>
 

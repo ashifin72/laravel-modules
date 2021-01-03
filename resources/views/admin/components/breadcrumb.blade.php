@@ -9,7 +9,7 @@
             <ol class="breadcrumb float-sm-right">
                 <li  class="breadcrumb-item"><a href="{{asset('/admin')}}"><i class="fas fa-home"></i>{{$parent}}</a>  </li>
                 @if (isset($local))
-                    <li><a href="{{route('admin.local.index')}}"><i></i>{{$local}}</a></li>
+                    <li><a href="{{route('admin.locales.index')}}"><i></i>{{$local}}</a></li>
                 @endif
                 @if (isset($slider))
                     <li><a href="{{route('admin.slider.index')}}"><i></i>{{$slider}}</a></li>
