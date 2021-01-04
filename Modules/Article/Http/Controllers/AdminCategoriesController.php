@@ -18,7 +18,7 @@ use Modules\Article\Http\Requests\BlogCategoryUpdateRequest;
 use Modules\Article\Repositories\BlogCategoryRepository;
 
 
-class AdminCategoryController extends AdminBaseController
+class AdminCategoriesController extends AdminBaseController
 {
     private $blogCategoryRepository;
     private $localRepository;
@@ -70,9 +70,11 @@ class AdminCategoryController extends AdminBaseController
     {
         $data = $request->input();// получаем  проверенные данные из формы
 
+
         $item = Category::create($data);
+
         return $this->blogCategoryRepository
-            ->resultRecording($item, 'admin.category.index');
+            ->resultRecording($item, 'admin.categories.index');
     }
 
     public function edit($id)
@@ -85,7 +87,7 @@ class AdminCategoryController extends AdminBaseController
         $categoryList = $this->blogCategoryRepository->getForComboBox();
 
         $locales = Locale::where('status', '=', '1')->orderBy('sort', 'desc')->get(array('local'));
-        return view('admin..blog.categories.edit', compact('item', 'categoryList', 'locales'));
+        return view('article::admin.categories.edit', compact('item', 'categoryList', 'locales'));
     }
 
     /**
@@ -108,11 +110,18 @@ class AdminCategoryController extends AdminBaseController
             ->save();
 
         return $this->blogCategoryRepository
-            ->resultRecording($result, 'admin.category.edit', $item->id);
+            ->resultRecording($result, 'admin.categories.edit', $item->id);
     }
 
     public function destroy($id)
     {
-        //
+        $result = Category::destroy($id);
+        if ($result) {
+            return redirect()
+                ->route('admin.categories.index')
+                ->with(['success' => "запись $id удалена"]);
+        } else {
+            return back()->withErrors(['msg' => 'Ошибка удаления']);
+        }
     }
 }

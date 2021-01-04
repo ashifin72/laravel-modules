@@ -26,11 +26,11 @@ class BlogCategoryGreateRequest extends FormRequest
         return [
             'title_ru' => 'required|min:5|max:200',
             'title_uk' => 'required|min:5|max:200',
-            'slug' => 'max:200|unique:blog_categories',
+            'slug' => 'max:200|unique:categories',
             'icon '=> 'string|max:100|min:3',
             'description_ru' => 'string|max:500|min:3',
             'description_uk' => 'string|max:500|min:3',
-            'parent_id'=> 'required|integer|exists:blog_categories,id',
+            'parent_id'=> 'required|integer|exists:categories,id',
 
         ];
     }

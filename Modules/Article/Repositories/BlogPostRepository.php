@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repositories\Admin;
+namespace Modules\Article\Repositories;
 
 use App;
-use App\Models\Admin\BlogPost as Model;
+use Modules\Article\Entities\Post as Model;
 use Illuminate\Database\Eloquent\Collection;
 use App\Repositories\CoreRepository;
 

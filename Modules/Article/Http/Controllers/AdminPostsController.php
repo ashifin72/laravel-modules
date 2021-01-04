@@ -2,19 +2,36 @@
 
 namespace Modules\Article\Http\Controllers;
 
+use App\Http\Controllers\Admin\AdminBaseController;
+use MetaTag;
+use Modules\Article\Repositories\BlogCategoryRepository;
+use Modules\Article\Repositories\BlogPostRepository;
+use App\Repositories\Admin\LocalRepository;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 
-class AdminPostsController extends Controller
+
+class AdminPostsController extends AdminBaseController
 {
+    private $blogPostRepository;
+    private $localRepository;
+    private $blogCategoryRepository;
+    public function __construct()
+    {
+        parent::__construct();
+        $this->blogPostRepository = app(BlogPostRepository::class);
+        $this->blogCategoryRepository = app(BlogCategoryRepository::class);
+        $this->localRepository = app(LocalRepository::class);
+    }
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
     public function index()
     {
-        return view('article::index');
+        MetaTag::setTags(['title' => __('admin.blog_articles')]);
+        $items = $this->blogPostRepository->getAllWithPostPaginate();
+        return view('article::admin.posts.index', compact('items'));
     }
 
     /**

@@ -46,7 +46,22 @@
 
                             <td>
                                 <a class="btn btn-outline-success"
-                                   href="{{route('admin.categories.edit', $item->id )}}">{{__('Редактировать')}}</a>
+                                   href="{{route('admin.categories.edit', $item->id )}}">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+
+                            </td>
+                            <td>
+                                <form
+                                    action="{{ route('admin.categories.destroy', $item->id) }}"
+                                    method="post" class="float-left">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-outline-danger btn-sm"
+                                            onclick="return confirm('Подтвердите удаление')">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endif
@@ -59,7 +74,8 @@
         </div>
 
         <a class="btn btn-outline-success btn-add"
-           href="{{route('admin.categories.create')}}">{{__('admin.add_article')}}</a>
+           href="{{route('admin.categories.create')}}">{{__('admin.add_article')}}
+        </a>
     </section>
 
     @if($items->total() > $items->count())

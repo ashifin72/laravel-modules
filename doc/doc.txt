@@ -157,8 +157,8 @@ php artisan make:controller Blog/Admin/PostController -r
 php artisan make:request PorfolioRequest
 
 Создаем observer
-php artisan make:observer BlogPostObserver --model=Models\Admin\BlogPost
-php artisan make:observer BlogCategoryObserver --model=Models\Admin\BlogCategory
+php artisan make:observer PostObserver --model=Modules\Article\Entities\Post
+php artisan make:observer CategoryObserver --model=Modules\Article\Entities\Category
 
  Создаем коллекции контроллер
 

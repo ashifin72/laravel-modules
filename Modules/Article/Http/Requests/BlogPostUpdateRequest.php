@@ -40,7 +40,7 @@ class BlogPostUpdateRequest extends FormRequest
             'description_ru'=> 'nullable|string|max:250',
             'content_uk' => 'required|string|max:15000|min:3',
             'content_ru' => 'required|string|max:15000|min:3',
-            'category_id'=> 'required|integer|exists:blog_categories,id',
+            'category_id'=> 'required|integer|exists:categories,id',
             'img'=> 'required||string|min:5|max:200|',
             'title_soc'=> 'nullable|string|min:8',
             'youtube'=> 'nullable|string|min:8',

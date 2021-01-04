@@ -65,7 +65,7 @@
                                id="slug" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="title">{{__('Сортировка')}}</label>
+                        <label for="title">{{__('admin.sort')}}</label>
                         <input type="number" min="1" max="10" name="sort" value="{{$item->sort ?? 1}}"
                                id="local" class="form-control" required>
                     </div>

@@ -2,8 +2,9 @@
   background-color: #ffffff;
 }
 
-.breadcrumb .breadcrumb-item {
-  margin-left: 15px;
+.breadcrumb .breadcrumb-item,
+.breadcrumb a {
+  margin-left: 10px;
 }
 
 .breadcrumb-item + .breadcrumb-item::before {

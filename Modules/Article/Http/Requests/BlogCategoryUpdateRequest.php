@@ -31,11 +31,11 @@ class BlogCategoryUpdateRequest extends FormRequest
             'icon '=> 'max:100|min:3',
             'description_ru' => 'string|max:500|min:3',
             'description_uk' => 'string|max:500|min:3',
-            'parent_id'=> 'required|integer|exists:blog_categories,id',
+            'parent_id'=> 'required|integer|exists:categories,id',
 
             'slug' => [
                 'max:200',
-                Rule::unique('blog_categories')->ignore($id),
+                Rule::unique('categories')->ignore($id),
             ],
         ];
     }

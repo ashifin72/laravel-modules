@@ -1,8 +1,8 @@
-@extends('site.admin.index')
+@extends('admin.index')
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">
-        @component('site.admin.components.breadcrumb')
+        @component('admin.components.breadcrumb')
             @slot('title') {{__('admin.blog_articles')}} @endslot
             @slot('parent') {{__('admin.home')}} @endslot
             @slot('active') {{__('admin.blog_articles')}} @endslot
@@ -16,7 +16,7 @@
         <div class="row justify-content-center">
             <div class="col-12">
                 <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-                    <a href="{{route('site.admin.post.create')}}" class="btn btn-primary">{{__('admin.add_article')}}</a>
+                    <a href="{{route('admin.posts.create')}}" class="btn btn-primary">{{__('admin.add_article')}}</a>
                 </nav>
                 <div class="card">
 
@@ -45,7 +45,7 @@
 
                                     </td>
                                     <td class="">
-                                        <a href="{{route('site.admin.post.edit', $item->id)}}">{{mb_substr($item->title, 0, 40, 'utf-8')}}</a>
+                                        <a href="{{route('admin.posts.edit', $item->id)}}">{{mb_substr($item->title, 0, 40, 'utf-8')}}</a>
 
                                     </td>
 

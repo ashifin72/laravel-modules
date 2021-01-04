@@ -1,13 +1,13 @@
-@extends('site.admin.index')
+@extends('admin.index')
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">
-        @component('site.admin.components.breadcrumb')
-            @slot('title') {{$item->name}}@endslot
+        @component('admin.components.breadcrumb')
+            @slot('title') {{$item->title}}@endslot
 
                 @slot('parent') {{__('admin.home')}} @endslot
                 @slot('category') {{__('admin.categories_blog')}} @endslot
-                @slot('active') {{__('admin.add_category')}}@endslot
+                @slot('active') {{__('admin.edit')}} {{$item->title}}@endslot
         @endcomponent
 
 
@@ -18,7 +18,7 @@
         <!-- Small boxes (Stat box) -->
 
 
-        <form method="POST" action="{{route('site.admin.category.update', $item->id)}}" enctype="multipart/form-data">
+        <form method="POST" action="{{route('admin.categories.update', $item->id)}}" enctype="multipart/form-data">
             @method('PATCH')
             @csrf
             <div class="row">
@@ -71,7 +71,7 @@
                                id="slug" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="title">{{__('Сортировка')}}</label>
+                        <label for="title">{{__('admin.sort')}}</label>
                         <input type="number" min="1" max="10" name="sort" value="{{$item->sort ?? 1}}"
                                id="local" class="form-control" required>
                     </div>
@@ -103,7 +103,7 @@
 
         </form>
 
-            <form method="post" onsubmit='return false' action="{{route('site.admin.category.destroy', $item->id)}}">
+            <form method="post" onsubmit='return false' action="{{route('admin.categories.destroy', $item->id)}}">
                 @method('DELETE')
                 @csrf
                 <div class="row justify-content-start" style="margin-top: 25px">

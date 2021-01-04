@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\LocaleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,15 +15,19 @@
 //Route::prefix('article')->group(function() {
 //    Route::get('/', 'ArticleController@index');
 //});
+
 Route::group(['middleware' => ['role:admin', 'auth']], function() {    // Admin
-
-
-    Route::prefix('admin')->group(function (){
-        Route::resource('category', 'AdminCategoryController')
-            ->except('show')
-            ->names('admin.categories');
-        Route::resource('post', 'AdminPostController')
-            ->except('show')
-            ->names('admin.posts');
+//Переключение языков admin
+    Route::get('locale/{locale}', '\App\Http\Controllers\Admin\LocaleController@changeLocale')->name('locale');
+    Route::middleware(['set_locale'])->group(function () {
+        Route::prefix('admin')->group(function (){
+            Route::resource('categories', 'AdminCategoriesController')
+                ->except('show')
+                ->names('admin.categories');
+            Route::resource('posts', 'AdminPostsController')
+                ->except('show')
+                ->names('admin.posts');
+        });
     });
+
 });

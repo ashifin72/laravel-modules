@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Observers\CategoryObserver;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Modules\Article\Entities\Category;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +27,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Schema::defaultStringLength(191);
+        date_default_timezone_set('Europe/Kiev');
+
     }
 }
