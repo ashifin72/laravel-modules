@@ -36,20 +36,20 @@ Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
 4.1 Аунтификация в отдельном файле admin
 4,2  Создаем модули
-php artisan module:make Artikle
+php artisan module:make Blog
 php artisan module:make Shop
-php artisan module:make Comment Tag Menu Portfolio Section
+php artisan module:make Menu Portfolio Section
 4.3Подключаем БД и создаем модели + миграции
 
 
  Создаем моодели и миграции в модулях
-php artisan module:make-model Post Article -m
-php artisan module:make-model Category Article -m
+php artisan module:make-model Post Blog -m
+php artisan module:make-model Category Blog -m
+php artisan module:make-model Comment Blog -m
+php artisan module:make-model Tag Blog -m
+php artisan module:make-migration create_post_tag_table Blog
 
-php artisan module:make-model Tag Tag -m
-php artisan module:make-migration create_post_tag_table Tag
 
-php artisan module:make-model Comment Comment -m
 
 php artisan module:make-model Menu Menu -m
 php artisan module:make-model MenuItem Menu -m
@@ -91,7 +91,8 @@ php artisan migrate
  php artisan make:seeder LocaleSeeder
  php artisan make:seeder InfoTableSeeder
 
-php artisan module:make-seeder BlogPost Article
+php artisan module:make-seeder Post Blog
+php artisan module:make-seeder Comments Blog
 
 
 12.  Делаем посев
@@ -121,14 +122,16 @@ php artisan make:controller BaseController
 php artisan make:controller Admin/LocaleController
 для вывода постов
 
-php artisan module:make-controller FrontPostsController Article
-php artisan module:make-controller AdminPostsController Article
-php artisan module:make-controller AdminCategoryController Article
-php artisan module:make-controller FrontCategoryController Article
+php artisan module:make-controller FrontPostsController Blog
+php artisan module:make-controller AdminPostsController Blog
+php artisan module:make-controller AdminCategoryController Blog
+php artisan module:make-controller FrontCategoryController Blog
 
-php artisan module:make-controller AdminCommentsController Comment
-php artisan module:make-controller FrontCommentsController Comment
+php artisan module:make-controller AdminCommentsController Blog
+php artisan module:make-controller FrontCommentsController Blog
 
+php artisan module:make-controller AdminTagsController Blog
+php artisan module:make-controller FrontTagsController Blog
 
 php artisan make:controller Admin/InfoController --resource
 
@@ -157,8 +160,8 @@ php artisan make:controller Blog/Admin/PostController -r
 php artisan make:request PorfolioRequest
 
 Создаем observer
-php artisan make:observer PostObserver --model=Modules\Article\Entities\Post
-php artisan make:observer CategoryObserver --model=Modules\Article\Entities\Category
+php artisan make:observer PostObserver --model=Modules\Blog\Entities\Post
+php artisan make:observer CategoryObserver --model=Modules\Blog\Entities\Category
 
  Создаем коллекции контроллер
 

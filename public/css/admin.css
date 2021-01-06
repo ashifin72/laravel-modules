@@ -1,0 +1,35 @@
+.breadcrumb {
+  background-color: #ffffff;
+}
+
+.breadcrumb .breadcrumb-item,
+.breadcrumb a {
+  margin-left: 10px;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  display: inline-block;
+  padding-right: 0.5rem;
+  color: #6c757d;
+  content: "*";
+}
+
+.admin-paginate {
+  font-size: 14px;
+  margin-top: 20px;
+  margin-left: 50px;
+}
+
+.admin-paginate svg {
+  width: 15px !important;
+}
+
+.form-group label {
+  color: #616161;
+  font-weight: 500 !important;
+}
+
+.admin__thumbnail {
+  width: 50px;
+}
+

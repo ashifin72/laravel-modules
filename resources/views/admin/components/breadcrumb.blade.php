@@ -53,8 +53,8 @@
                 @if (isset($feedback))
                     <li><a href="{{route('admin.feedback.index')}}"><i></i>{{$feedback}}</a></li>
                 @endif
-                @if (isset($currency))
-                    <li><a href=""><i></i>{{$currency}}</a></li>
+                @if (isset($tags))
+                    <li><a href="{{route('admin.tags.index')}}"><i></i>{{$tags}}</a></li>
                 @endif
                 <li><i class="breadcrumb-item active"></i> {{$active}}</li>
 

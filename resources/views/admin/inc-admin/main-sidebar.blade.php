@@ -63,19 +63,25 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{route('admin.posts.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="far fa-address-card"></i>
                                 <p>{{__('admin.article_blog')}}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('admin.categories.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="far fa-calendar-alt"></i>
                                 <p>{{__('admin.categories_blog')}}</p>
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{route('admin.tags.index')}}" class="nav-link">
+                                <i class="fas fa-tags"></i>
+                                <p>{{__('blog.tags')}}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{route('admin.comments.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="far fa-comments"></i>
                                 <p>{{__('admin.title_comments')}}</p>
                             </a>
                         </li>

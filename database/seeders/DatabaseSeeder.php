@@ -3,12 +3,14 @@
 namespace Database\Seeders;
 
 
+
 use Illuminate\Database\Seeder;
 
-use Modules\Article\Database\Factories\BlogPostFactory;
+use Modules\Blog\Database\Factories\BlogPostFactory;
 use InfoTableSeeder;
-use Modules\Article\Database\Seeders\BlogCategoriesSeeder;
-use Modules\Article\Database\Seeders\PostSeeders;
+use Modules\Blog\Database\Seeders\BlogCategoriesSeeder;
+use Modules\Blog\Database\Seeders\PostSeeders;
+use Modules\Blog\Database\Seeders\CommentTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,6 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call(InfoTableSeeder::class);
         $this->call(BlogCategoriesSeeder::class);
         $this->call(PostSeeders::class);
+        $this->call(CommentTableSeeder::class);
 
 
     }

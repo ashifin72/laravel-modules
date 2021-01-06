@@ -99,7 +99,7 @@
 |        | GET|HEAD  | api/user                      |                       | Closure                                                                | App\Http\Middleware\Authenticate:api                    |
 |        |           |                               |                       |                                                                        | Illuminate\Routing\Middleware\ThrottleRequests:api      |
 |        |           |                               |                       |                                                                        | Illuminate\Routing\Middleware\SubstituteBindings        |
-|        | GET|HEAD  | article                       |                       | Modules\Article\Http\Controllers\ArticleController@index               | App\Http\Middleware\EncryptCookies                      |
+|        | GET|HEAD  | article                       |                       | Modules\Blog\Http\Controllers\ArticleController@index               | App\Http\Middleware\EncryptCookies                      |
 |        |           |                               |                       |                                                                        | Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse |
 |        |           |                               |                       |                                                                        | Illuminate\Session\Middleware\StartSession              |
 |        |           |                               |                       |                                                                        | Illuminate\View\Middleware\ShareErrorsFromSession       |

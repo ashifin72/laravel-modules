@@ -8,6 +8,7 @@
 
 namespace App\Repositories;
 
+use App\Models\locale;
 use Illuminate\Database\Eloquent\Model;
 use function PHPSTORM_META\elementType;
 
@@ -77,7 +78,6 @@ abstract class CoreRepository
     {
         return $this
             ->startConditions()
-
             ->where($column, '=', $slug)
             ->first();
     }
@@ -127,50 +127,50 @@ abstract class CoreRepository
         }
     }
 
-    /**  Resize Images for My needs */
-    public static function resize($target, $dest, $wmax, $hmax, $ext)
-    {
-        list($w_orig, $h_orig) = getimagesize($target);
-        $ratio = $w_orig / $h_orig;
-
-        if (($wmax / $hmax) > $ratio) {
-            $wmax = $hmax * $ratio;
-        } else {
-            $hmax = $wmax / $ratio;
-        }
-
-        $img = "";
-        // imagecreatefromjpeg | imagecreatefromgif | imagecreatefrompng
-        switch ($ext) {
-            case("gif"):
-                $img = imagecreatefromgif($target);
-                break;
-            case("png"):
-                $img = imagecreatefrompng($target);
-                break;
-            default:
-                $img = imagecreatefromjpeg($target);
-        }
-        $newImg = imagecreatetruecolor($wmax, $hmax);
-        if ($ext == "png") {
-            imagesavealpha($newImg, true);
-            $transPng = imagecolorallocatealpha($newImg, 0, 0, 0, 127);
-            imagefill($newImg, 0, 0, $transPng);
-        }
-        imagecopyresampled($newImg, $img, 0, 0, 0, 0, $wmax, $hmax, $w_orig,
-            $h_orig); // копируем и ресайзим изображение
-        switch ($ext) {
-            case("gif"):
-                imagegif($newImg, $dest);
-                break;
-            case("png"):
-                imagepng($newImg, $dest);
-                break;
-            default:
-                imagejpeg($newImg, $dest);
-        }
-        imagedestroy($newImg);
-    }
+//    /**  Resize Images for My needs */
+//    public static function resize($target, $dest, $wmax, $hmax, $ext)
+//    {
+//        list($w_orig, $h_orig) = getimagesize($target);
+//        $ratio = $w_orig / $h_orig;
+//
+//        if (($wmax / $hmax) > $ratio) {
+//            $wmax = $hmax * $ratio;
+//        } else {
+//            $hmax = $wmax / $ratio;
+//        }
+//
+//        $img = "";
+//        // imagecreatefromjpeg | imagecreatefromgif | imagecreatefrompng
+//        switch ($ext) {
+//            case("gif"):
+//                $img = imagecreatefromgif($target);
+//                break;
+//            case("png"):
+//                $img = imagecreatefrompng($target);
+//                break;
+//            default:
+//                $img = imagecreatefromjpeg($target);
+//        }
+//        $newImg = imagecreatetruecolor($wmax, $hmax);
+//        if ($ext == "png") {
+//            imagesavealpha($newImg, true);
+//            $transPng = imagecolorallocatealpha($newImg, 0, 0, 0, 127);
+//            imagefill($newImg, 0, 0, $transPng);
+//        }
+//        imagecopyresampled($newImg, $img, 0, 0, 0, 0, $wmax, $hmax, $w_orig,
+//            $h_orig); // копируем и ресайзим изображение
+//        switch ($ext) {
+//            case("gif"):
+//                imagegif($newImg, $dest);
+//                break;
+//            case("png"):
+//                imagepng($newImg, $dest);
+//                break;
+//            default:
+//                imagejpeg($newImg, $dest);
+//        }
+//        imagedestroy($newImg);
+//    }
 
     /**
      * @return Model
@@ -183,6 +183,14 @@ abstract class CoreRepository
             $id_local = 1;
         }
         return $id_local;
+    }
+    /**
+     * получаем активные  локали для вывода вадминке
+     */
+    public function getActiveLocales()
+    {
+        $locales = Locale::where('status', '=', '1')->orderBy('sort', 'desc')->get(array('local'));
+        return $locales;
     }
 
 

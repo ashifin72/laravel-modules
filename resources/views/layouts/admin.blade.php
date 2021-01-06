@@ -14,8 +14,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('assets/admin/css/adminlte.css') }}">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/admin.css') }}">
 </head>
 <body class="sidebar-mini">
 <div class="wrapper">
@@ -32,7 +34,7 @@
         <!-- Main content -->
         <div class="content">
             @include("admin.components.result_messages")
-            <div class="container-fluid">
+            <div class="container">
                 @yield('content')
             </div><!-- /.container-fluid -->
         </div>
@@ -54,6 +56,22 @@
 
 <!-- jQuery -->
 <script src="{{ asset('assets/admin/js/admin.js') }}"></script>
+<script>
+  $('.nav-sidebar a').each(function () {
+    let location = window.location.protocol + '//' + window.location.host + window.location.pathname;
+    let link = this.href;
+    if (link == location) {
+      $(this).addClass('active');
+      $(this).closest('.has-treeview').addClass('menu-open');
+    }
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    bsCustomFileInput.init();
+  });
+</script>
 
 </body>
 </html>
