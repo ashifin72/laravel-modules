@@ -4,8 +4,8 @@
 namespace App\Repositories\Admin;
 
 
-use App\Models\Admin\Info;
-use App\Models\Admin\Info as Model;
+
+use App\Models\Info as Model;
 use App\Repositories\CoreRepository;
 
 class InfoRepository extends CoreRepository
@@ -33,24 +33,7 @@ class InfoRepository extends CoreRepository
     {
         return $this->startConditions()->find($id);
     }
-    /**
-     * получаем котегории для вывода в списке
-     */
-//    public function getForComboBox()
-//    {
-//        $columns = implode(',', [
-//            'id',
-//            'CONCAT (id, ". ", title) AS id_title',
-//        ]);
-//
-//        $result = $this
-//            ->startConditions()
-//            ->selectRaw($columns)
-//            ->toBase()
-//            ->get();
-//        return $result;
-//
-//    }
+
 
     public function getAllWithInfo($perPage = null, $columns = [])
     {

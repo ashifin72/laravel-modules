@@ -42,7 +42,7 @@
                                 @if($item->img == null)
                                     <img style="width: 50px" src="{{asset('/assets/admin/img/logo-mini.png')}}"
                                          alt="{{$item->name}}">
-                                @else <img style="width: 50px" src="{{asset('storage/' . $item->img)}}" alt="{{$item->name}}">
+                                @else <img style="width: 50px" src="{{asset('uploads/' . $item->img)}}" alt="{{$item->name}}">
                                 @endif
                             </td>
                             <td>{{$item->email}}</td>

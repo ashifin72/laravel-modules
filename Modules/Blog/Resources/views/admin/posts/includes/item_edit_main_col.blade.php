@@ -47,16 +47,18 @@
                             </div>
                             <div class="form-group">
                                 <label for="content">{{__('admin.text')}} {{$locale->local}}</label>
-                                <textarea class="form-control" id="editor{{$loop->iteration}}" rows="15" name="{{$content}}">
+                                <textarea class="form-control content-editor_{{$locale->local}}" id="editor{{$loop->iteration}}" rows="10" name="{{$content}}">
                                 {{ $item->$content}}
                                     </textarea>
                             </div>
                             <div class="form-group">
                                 <label for="description">{{__('admin.description')}} {{$locale->local}}</label>
-                                <textarea class="form-control" id="editor{{$loop->iteration + 10}}" rows="2" name="description_{{$locale->local}}">
+                                <textarea class="form-control description-editor" id="editor{{$loop->iteration + 10}}" rows="1" name="description_{{$locale->local}}">
                                 {{ $item->$description}}
                                     </textarea>
                             </div>
+
+
                         @empty
                             <h4>{{__('admin.none')}}</h4>
                         @endforelse

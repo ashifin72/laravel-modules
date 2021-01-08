@@ -102,7 +102,7 @@
                         @if($item->img == null)
                             <img style="width: 50px" src="{{asset('/assets/admin/img/logo-mini.png')}}"
                                  alt="{{$item->name}}">
-                        @else <img style="width: 50px" src="{{asset('storage/' . $item->img)}}" alt="{{$item->name}}">
+                        @else <img style="width: 50px" src="{{asset('uploads/' . $item->img)}}" alt="{{$item->name}}">
                         @endif
                         <label for="img">{{__('admin.photo_users')}}</label>
                         <input type="file" name="img" class="form-control-file">

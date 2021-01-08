@@ -14,7 +14,7 @@
                 @if(Auth::user()->img == null)
                     <img class="img-circle elevation-2" alt="{{ Auth::user()->name }}" src="{{asset('/assets/img-admin/logo-mini.png')}}"
                          alt="{{Auth::user()->name}}">
-                @else <img class="img-circle elevation-2" alt="{{ Auth::user()->name}}" src="{{asset('/storage/' . Auth::user()->img)}}" alt="{{ Auth::user()->name}}">
+                @else <img class="img-circle elevation-2" alt="{{ Auth::user()->name}}" src="{{asset('/uploads/' . Auth::user()->img)}}" alt="{{ Auth::user()->name}}">
                 @endif
 
             </div>

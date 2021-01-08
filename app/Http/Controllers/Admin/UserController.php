@@ -15,6 +15,7 @@ use App\Repositories\Admin\UserRepository;
 use Illuminate\Http\Request;
 
 use MetaTag;
+use Storage;
 
 class UserController extends AdminBaseController
 {
@@ -59,7 +60,7 @@ class UserController extends AdminBaseController
         if (($request['img'])){
             $folder = 'users'. (int)$request['role'];
 
-            $img = $request->file('img')->store('upload/'. $folder, 'public');
+            $img = $request->file('img')->store('images/users/'. $folder, 'public');
 
         }
         $data = [
@@ -130,15 +131,13 @@ class UserController extends AdminBaseController
         $colums = ['name', 'email', 'img', 'site','viber', 'phone', 'facebook', 'telegram', 'whatsapp', 'skype'];
 
 
-
-
         foreach ($colums as $colum){
             $user->$colum = $request[$colum];
         }
         if (($request['img'])){
             $folder = 'users'. (int)$request['role'];
 
-            $img = $request->file('img')->store('upload/'. $folder, 'public');
+            $img = $request->file('img')->store('images/users/'. $folder, 'public');
             $user['img'] = $img;
         }
 
@@ -147,13 +146,13 @@ class UserController extends AdminBaseController
         $save = $user->save();
         if (!$save) {
             return back()
-                ->withErrors(['msg' => "Ошибка сохранения"])
+                ->withErrors(['msg' => __('admin.error_save')])
                 ->withInput();
         } else {
             $role->where('user_id', $user->id)->update(['role_id' => (int)$request['role']]);
             return redirect()
                 ->route('admin.users.edit', $user->id)
-                ->with(['success' => 'Успешно сохранено']);
+                ->with(['success' => __('admin.save')]);
         }
     }
 
@@ -165,40 +164,15 @@ class UserController extends AdminBaseController
      */
     public function destroy(User $user)
     {
+        Storage::delete($user->img);
         $result = $user->forceDelete();
         if($result){
             return redirect()
                 ->route('admin.users.index')
-                ->with(['success' => "Пользователь " . ucfirst($user->name) . " удален"]);
+                ->with(['success' => __('admin.user') . ' ' . ucfirst($user->name) . " " . __('admin.delete')]);
         } else {
             return back()->withErrors(['msg' => 'Ошибка удаления']);
         }
     }
 
-    /** Delete Image */
-    public function deleteImage($filename)
-    {
-        File::delete('upload/users/' . $filename);
-    }
-
-    /** Upload Single Image from my.js
-     * @param Request $request
-     * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
-     */
-    public function ajaxImage(InfoUploadImgRequest $request)
-    {
-        if ($request->isMethod('get')) {
-            return view('admin.user.include.image_single_edit');
-        } else {
-
-            $extension = $request->file('img')->getClientOriginalExtension();
-            $dir = 'upload/users/';
-            $filename = uniqid() . '_' . time() . '.' . $extension;
-            $request->file('img')->move($dir, $filename);
-            $wmax = 500;
-            $hmax = 500;
-            $this->userRepository->uploadImg($filename, $wmax, $hmax);
-            return $filename;
-        }
-    }
 }

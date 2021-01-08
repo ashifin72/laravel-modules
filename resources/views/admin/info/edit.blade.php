@@ -1,8 +1,8 @@
-@extends('site.admin.index')
+@extends('admin.index')
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">
-        @component('site.admin.components.breadcrumb')
+        @component('admin.components.breadcrumb')
             @slot('title'){{__('admin.info_project')}} @endslot
             @slot('parent') {{__('admin.home')}} @endslot
             @slot('active') {{__('admin.info_project')}}@endslot
@@ -14,12 +14,13 @@
         <!-- Small boxes (Stat box) -->
 
 
-        <form method="POST" action="{{route('site.admin.info.update', $item->id)}}" enctype="multipart/form-data">
+        <form method="POST" action="{{route('admin.info.update', $item->id)}}" enctype="multipart/form-data">
             @method('PATCH')
             @csrf
             <div class="row">
 
                 <div class="col-sm-8">
+
                     <ul class="nav nav-tabs" id="nav-tab" role="tablist">
 
                         @php $i=1   @endphp
@@ -58,34 +59,35 @@
 
                                         <div class="form-group">
                                             <label for="title">{{__('admin.text')}} {{$locale->local}}</label>
-                                            <textarea class="form-control" id="editor{{$loop->iteration}}" rows="10"
+                                            <textarea class="form-control content-editor_{{$locale->local}}"
+                                                      id="editor{{$loop->iteration}}" rows="10"
                                                       name="{{$content}}">
-                                {{ $item->$content}}
-                                    </textarea>
+                                               {{ $item->$content}}
+                                             </textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="title">{{__('admin.slogan')}} {{$locale->local}}</label>
                                             <textarea class="form-control" id="slogan_{{$locale->local}}" rows="3"
                                                       name="{{$slogan}}">
-                                {{ $item->$slogan}}
-                                    </textarea>
+                                                {{trim($item->$slogan) }}
+                                            </textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="title">{{__('admin.description')}} {{$locale->local}}</label>
-                                            <textarea class="form-control ck_editor" id="editor{{$loop->iteration + 3}}" rows="3"
+                                            <textarea class="form-control" id="editor{{$loop->iteration + 3}}"
+                                                      rows="3"
                                                       name="{{$description}}">
-                                {{ $item->$description}}
-                                    </textarea>
+                                                  {{ trim($item->$description) }}
+                                            </textarea>
                                         </div>
                                         <div class="form-group">
 
-                                            <label for="operating_time">{{__('admin.operating_time')}} {{$locale->local}}</label>
+                                            <label
+                                                for="operating_time">{{__('admin.operating_time')}} {{$locale->local}}</label>
                                             <textarea class="form-control" id="operating_time" rows="3"
                                                       name="{{$operating_time}}"> {{ $item->$operating_time}}
                                             </textarea>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
@@ -121,21 +123,21 @@
                             <div class="form-group">
                                 <label for="title"><i class="fab fa-facebook-f"></i> Facebook</label>
                                 <input type="tel" name="facebook" value="{{$item->facebook}}"
-                                        class="form-control">
+                                       class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="title"><i class="fab fa-youtube"></i>  YouTube</label>
+                                <label for="title"><i class="fab fa-youtube"></i> YouTube</label>
                                 <input type="tel" name="youtube" value="{{$item->youtube}}"
-                                        class="form-control">
+                                       class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="title"><i class="fab fa-instagram"></i> Instagram</label>
                                 <input type="instagram" name="instagram" value="{{$item->instagram}}"
-                                        class="form-control">
+                                       class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -152,8 +154,8 @@
                                 <label for="title">{{__('admin.footer_code')}}</label>
                                 <textarea class="form-control" id="footer_code" rows="3"
                                           name="footer_code">
-                                {{ $item->footer_code}}
-                                    </textarea>
+                                    {{ $item->footer_code}}
+                                </textarea>
                             </div>
                         </div>
                     </div>
@@ -165,24 +167,29 @@
 
 
                     <div class="form-group  admin__img-block">
-                        <label class="admin__label-img" for="title">{{__('admin.download_logo')}}</label>
-                        @isset($item->img)
+                        <h5>{{__('info.logo')}} {{__('info.header')}}</h5>
+                        @if($item->img)
                             <img class="admin__img-head" src="{{$item->img}}" alt="{{$item->title}}">
-                        @endisset
-
+                        @else
+                            <label class="admin__label-img" for="title">{{__('admin.download_logo')}}</label>
+                        @endif
                         <input type="text" name="img" readonly="readonly" onclick="openKCFinder(this)"
                                value="{{$item->img}}" class="form-control button-kcfinder  btn btn-outline-success"
-                               style="cursor:pointer"/>
+                               style="cursor:pointer"
+                               id="ckfinder-input-1"/>
                     </div>
                     <div class="form-group  admin__img-block">
-                        <label class="admin__label-img" for="title">{{__('admin.download_logo_footer')}}</label>
-                        @isset($item->img_footer)
+                        <h5>{{__('info.logo')}} {{__('info.footer')}}</h5>
+                        @if($item->img_footer)
                             <img class="admin__img-head" src="{{$item->img_footer}}" alt="{{$item->title}}">
-                        @endisset
+                        @else
+                            <label class="admin__label-img" for="title">{{__('admin.download_logo_footer')}}</label>
+                        @endif
 
-                        <input type="text" name="img_footer" readonly="readonly" onclick="openKCFinder(this)"
+                        <input type="text" name="img_footer" readonly="readonly"
                                value="{{$item->img_footer}}"
-                               class="form-control button-kcfinder  btn btn-outline-success" style="cursor:pointer"/>
+                               class="form-control button-kcfinder  btn btn-outline-success" style="cursor:pointer"
+                               id="ckfinder-input-2"/>
                     </div>
                 </div>
             </div>

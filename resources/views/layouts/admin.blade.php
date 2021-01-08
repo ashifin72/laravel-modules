@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{{ asset('assets/admin/css/admin.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/admin.css') }}">
 </head>
-<body class="sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
 
     <!-- Main Header -->
@@ -56,22 +56,17 @@
 
 <!-- jQuery -->
 <script src="{{ asset('assets/admin/js/admin.js') }}"></script>
+<script src="{{ asset('assets/admin/ckeditor5/build/ckeditor.js') }}"></script>
+<script src="{{ asset('assets/admin/ckfinder/ckfinder.js') }}"></script>
+<script src="{{ asset('assets/admin/js/main.js') }}"></script>
+
 <script>
-  $('.nav-sidebar a').each(function () {
-    let location = window.location.protocol + '//' + window.location.host + window.location.pathname;
-    let link = this.href;
-    if (link == location) {
-      $(this).addClass('active');
-      $(this).closest('.has-treeview').addClass('menu-open');
-    }
-  });
+
+</script>
+<script>
+
 </script>
 
-<script type="text/javascript">
-  $(document).ready(function () {
-    bsCustomFileInput.init();
-  });
-</script>
 
 </body>
 </html>

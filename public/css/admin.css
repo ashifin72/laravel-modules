@@ -33,3 +33,17 @@
   width: 50px;
 }
 
+.ck-editor__editable_inline {
+  min-height: 300px !important;
+}
+
+.description-editor {
+  min-height: 100px !important;
+}
+
+.admin__img-head {
+  width: 150px;
+  display: block;
+  margin: 0 auto 10px;
+}
+

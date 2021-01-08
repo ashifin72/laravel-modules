@@ -133,6 +133,9 @@ php artisan module:make-controller FrontCommentsController Blog
 php artisan module:make-controller AdminTagsController Blog
 php artisan module:make-controller FrontTagsController Blog
 
+php artisan module:make-controller AdminMenuController Menu
+php artisan module:make-controller AdminMenuItemController Menu
+
 php artisan make:controller Admin/InfoController --resource
 
 Аутентификация  Установка фронтенда из коробки

@@ -37,7 +37,7 @@ Route::group(['middleware' => ['role:admin', 'auth']], function() {
                 ->except('show')
                 ->names('admin.users');
             Route::resource('info', 'InfoController')
-                ->except('show')
+                ->except('show', 'store', 'destroy')
                 ->names('admin.info');
             Route::resource('locales', 'LocaleController')
                 ->except('show')

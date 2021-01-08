@@ -14,10 +14,18 @@
 
 
 
-Route::prefix('admin')->group(function (){
-    Route::resource('menus', 'MenuController')
-        ->except('show')
-        ->names('admin.menus');
+Route::group(['middleware' => ['role:admin', 'auth']], function() {    // Admin
+//Переключение языков admin
+    Route::get('locale/{locale}', '\App\Http\Controllers\Admin\LocaleController@changeLocale')->name('locale');
+    Route::middleware(['set_locale'])->group(function () {
+        Route::prefix('admin')->group(function (){
+            Route::resource('menus', 'AdminMenuController')
+                ->except('show')
+                ->names('admin.menus');
+            Route::resource('munuitems', 'AdminMenuItemController')
+                ->except('show')
+                ->names('admin.munuitems');
+        });
+    });
 
 });
-

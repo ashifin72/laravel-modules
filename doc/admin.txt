@@ -54,17 +54,7 @@ php artisan make:model Permission -m
   php artisan make:controller Admin\AdminBaseController
   php artisan make:controller Admin\AdminHomeController
   php artisan make:controller Admin\UserController
-  php artisan make:controller Site\Admin\BlogCategoryController -r
-  php artisan make:controller Site\Admin\BlogPostController -r
-  php artisan make:controller Site\Admin\CommentController -r
-  php artisan make:controller Site\Admin\FaqController -r
-  php artisan make:controller Site\Admin\FilterController -r
-  php artisan make:controller Site\Admin\InfoController -r
-  php artisan make:controller Site\Admin\MenuController -r
-  php artisan make:controller Site\Admin\LocaleController -r
-  php artisan make:controller Site\Admin\PortfolioController -r
-  php artisan make:controller Site\Admin\SliderController -r
-  php artisan make:controller Site\Admin\AdminUserController -r
+
 
 
    Репозитории  создаем в каталоге app/Repositories
