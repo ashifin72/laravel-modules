@@ -114,7 +114,7 @@ class AdminMenuItemController extends AdminBaseController
                 ->route('admin.menus.edit', $item->menu_id )
                 ->with(['success' => "запись $item->title удалена"]);
         } else {
-            return back()->withErrors(['msg' => 'Ошибка удаления']);
+            return back()->withErrors(['msg' => __('admin.error_del')]);
         }
     }
 }

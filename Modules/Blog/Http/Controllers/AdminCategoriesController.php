@@ -116,17 +116,21 @@ class AdminCategoriesController extends AdminBaseController
 
     public function destroy($id)
     {
-        $post = Post::where('category_id', '=', $id);
+        $post = Post::where('category_id', '=', $id)->get();
+        $category = Category::where('parent_id', '=', $id)->get();
         if (count($post)){
             return back()->withErrors(['msg'=> __('admin.error_isset_date')]);
+        }
+        if (count($category)){
+            return back()->withErrors(['msg'=> __('admin.error_isset_parent')]);
         }
         $result = Category::destroy($id);
         if ($result) {
             return redirect()
                 ->route('admin.categories.index')
-                ->with(['success' => "запись $id удалена"]);
+                ->with(['success' => __('admin.article'). ' id ' . $id . __('admin.delete')]);
         } else {
-            return back()->withErrors(['msg' => 'Ошибка удаления']);
+            return back()->withErrors(['msg' => __('admin.error_del')]);
         }
     }
 }

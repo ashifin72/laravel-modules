@@ -129,7 +129,7 @@ class AdminMenuController extends AdminBaseController
             if ($result) {
                 return redirect()
                     ->route('admin.menus.index')
-                    ->with(['success' => "запись $id удалена"]);
+                    ->with(['success' => __('admin.article'). ' id ' . $id . __('admin.delete')]);
             } else {
                 return back()->withErrors(['msg' => __('admin.error_delete')]);
             }

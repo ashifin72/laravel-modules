@@ -128,7 +128,7 @@ class UserController extends AdminBaseController
      */
     public function update(AdminUserUpdateRequest $request, User $user, UserRole $role)
     {
-        $colums = ['name', 'email', 'img', 'site','viber', 'phone', 'facebook', 'telegram', 'whatsapp', 'skype'];
+        $colums = ['name', 'email', 'site','viber', 'phone', 'facebook', 'telegram', 'whatsapp', 'skype'];
 
 
         foreach ($colums as $colum){
@@ -171,7 +171,7 @@ class UserController extends AdminBaseController
                 ->route('admin.users.index')
                 ->with(['success' => __('admin.user') . ' ' . ucfirst($user->name) . " " . __('admin.delete')]);
         } else {
-            return back()->withErrors(['msg' => 'Ошибка удаления']);
+            return back()->withErrors(['msg' => __('admin.error_del')]);
         }
     }
 

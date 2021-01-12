@@ -108,9 +108,9 @@ class AdminTagsController extends AdminBaseController
         if ($result) {
             return redirect()
                 ->route('admin.tags.index')
-                ->with(['success' => "запись $id удалена"]);
+                ->with(['success' => __('admin.article'). ' id ' . $id . __('admin.delete')]);
         } else {
-            return back()->withErrors(['msg' => 'Ошибка удаления']);
+            return back()->withErrors(['msg' => __('admin.error_del')]);
         }
     }
 }

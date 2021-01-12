@@ -99,14 +99,39 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        @if($item->img == null)
-                            <img style="width: 50px" src="{{asset('/assets/admin/img/logo-mini.png')}}"
+                        @isset($item->img)
+                            <img class="responsive admin__avatar_user"  src="/uploads/{{$item->img}}"
                                  alt="{{$item->name}}">
-                        @else <img style="width: 50px" src="{{asset('uploads/' . $item->img)}}" alt="{{$item->name}}">
-                        @endif
-                        <label for="img">{{__('admin.photo_users')}}</label>
-                        <input type="file" name="img" class="form-control-file">
+                        @endisset
+
+                        <div for="user" class="mt-2">
+                            @if($item->img) <img style="width: 50px" src="/uploads/{{$item->img}}"
+                                                 alt="{{$item->name}}">
+                            {{__('admin.replace_img')}}
+                            @else
+                                <img style="width: 50px" src="{{asset('/assets/admin/img/logo-mini.png')}}"
+                                     alt="{{$item->name}}">
+                                {{__('admin.upload_img')}}
+                            @endif
+                        </div>
+
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" name="img" id="img"
+                                       class="custom-file-input">
+                                <label class="custom-file-label" for="img">{{__('admin.photo_users')}}</label>
+                            </div>
+                        </div>
                     </div>
+{{--                    <div class="form-group">--}}
+{{--                        @if($item->img == null)--}}
+{{--                            <img style="width: 50px" src="{{asset('/assets/admin/img/logo-mini.png')}}"--}}
+{{--                                 alt="{{$item->name}}">--}}
+{{--                        @else <img style="width: 50px" src="{{asset('uploads/' . $item->img)}}" alt="{{$item->name}}">--}}
+{{--                        @endif--}}
+{{--                        <label for="img">{{__('admin.photo_users')}}</label>--}}
+{{--                        <input type="file" name="img" class="form-control-file">--}}
+{{--                    </div>--}}
                 </div>
 
                 <div class="clesr"></div>
