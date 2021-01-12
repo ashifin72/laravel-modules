@@ -34,7 +34,7 @@
 
                 <div class=" col-sm-4">
                     @if($item->status == 0)
-                        <div class="alert alert-danger">
+                        <div class="alert alert-default-danger">
                             {{__('admin.disabled')}}
                         </div>
                     @else

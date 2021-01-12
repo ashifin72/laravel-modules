@@ -47,11 +47,12 @@ php artisan module:make-model Post Blog -m
 php artisan module:make-model Category Blog -m
 php artisan module:make-model Comment Blog -m
 php artisan module:make-model Tag Blog -m
+php artisan module:make-model MenuItem Menu -m
 php artisan module:make-migration create_post_tag_table Blog
 
 
 
-php artisan module:make-model Menu Menu -m
+
 php artisan module:make-model MenuItem Menu -m
 
 php artisan module:make-model Section Section -m
@@ -75,7 +76,9 @@ s  config/app.php
 
  Отдельно миграции
  php artisan make:migration create_user_roles_table --create=user_roles
- php artisan make:migration create_portfolios_table --create=portfolios
+ php artisan make:migration choange_portfolios_table --create=portfolios
+
+ php artisan module:make-migration choange_portfolios_table  Portfolio
 
   Миграции для редактирования таблиц. Добавляем связи
   php artisan make:migration chahde_info_table --table=infos
@@ -136,6 +139,13 @@ php artisan module:make-controller FrontTagsController Blog
 php artisan module:make-controller AdminMenuController Menu
 php artisan module:make-controller AdminMenuItemController Menu
 
+php artisan module:make-controller AdminPortfolioController Portfolio
+php artisan module:make-controller AdminPortfolioCategoryController Portfolio
+php artisan module:make-controller AdminPortfolioFeedbackController Portfolio
+
+php artisan module:make-controller AdminSectionController Section
+php artisan module:make-controller AdminSectionItemController Section
+
 php artisan make:controller Admin/InfoController --resource
 
 Аутентификация  Установка фронтенда из коробки
@@ -149,8 +159,7 @@ php artisan cache:clear
 php artisan config:clear
 php artisan config:cache
 
-  Созаем аунтификацию
-   Переносим  модель User в папку Models
+
 
 
  распечатать мартшруты

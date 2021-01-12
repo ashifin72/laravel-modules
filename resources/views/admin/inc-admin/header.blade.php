@@ -1,5 +1,6 @@
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
+
     <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
@@ -15,11 +16,14 @@
             @php
                 $locale = \App::getLocale();
 
+
             @endphp
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            <a class="nav-link dropdown-toggle" href="#"
+               id="navbarDropdown" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
                 {{$locale}}
             </a>
+
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{{route('locale', $loc ='uk')}}"
                    @if($locale == $loc) style="display: none" @endif >uk</a>
@@ -27,6 +31,7 @@
                    @if($locale == $loc) style="display: none" @endif >ru</a>
             </div>
         </li>
+
 
     </ul>
 

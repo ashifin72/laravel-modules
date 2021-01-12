@@ -1,11 +1,11 @@
-@extends('site.admin.index')
+@extends('admin.index')
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">
-        @component('site.admin.components.breadcrumb')
+        @component('admin.components.breadcrumb')
             @slot('title') {{__('admin.add')}} @endslot
             @slot('parent') {{__('admin.home')}} @endslot
-            @slot('menu') {{__('admin.menus_site')}} @endslot
+            @slot('menus') {{__('admin.menus_site')}} @endslot
             @slot('active') {{__('admin.add')}}@endslot
         @endcomponent
 
@@ -17,7 +17,7 @@
         <!-- Small boxes (Stat box) -->
 
 
-        <form method="POST" action="{{route('site.admin.menu.store')}}">
+        <form method="POST" action="{{route('admin.menus.store')}}">
             @csrf
             <div class="row">
                 <div class="form-group col-md-6">
@@ -40,7 +40,7 @@
                 <label for="status" class="form-check-label">{{__('Опубликованно')}}</label>
             </div>
 
-            <button type="submit" class="btn btn-outline-success">{{__('Сохранить')}}</button>
+            <button type="submit" class="btn btn-outline-success">{{__('admin.save')}}</button>
         </form>
 
 

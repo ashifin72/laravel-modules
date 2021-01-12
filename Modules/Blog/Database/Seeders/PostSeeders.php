@@ -33,7 +33,7 @@ class PostSeeders extends Seeder
                 'content_uk' => $text . '№' . $i,
                 'content_ru' => $text . '№' . $i,
                 'content_en' => $text . '№' . $i,
-                'img'=> '/upload/files/thumbnail/img.jpg',
+                'img'=> 'images/logo-mini.png',
 
             ];
         }

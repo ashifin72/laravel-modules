@@ -2,7 +2,7 @@
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">
-        @component('site.admin.components.breadcrumb')
+        @component('admin.components.breadcrumb')
             @slot('title') {{__('Добавить язык')}} @endslot
             @slot('parent') {{__('Главная')}} @endslot
             @slot('local') {{__('Локализации сайта')}} @endslot

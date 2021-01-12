@@ -14,7 +14,7 @@ class MenuController extends Controller
      */
     public function index()
     {
-        return view('menu::index');
+        return view('menus::index');
     }
 
     /**
@@ -23,7 +23,7 @@ class MenuController extends Controller
      */
     public function create()
     {
-        return view('menu::create');
+        return view('menus::create');
     }
 
     /**
@@ -43,7 +43,7 @@ class MenuController extends Controller
      */
     public function show($id)
     {
-        return view('menu::show');
+        return view('menus::show');
     }
 
     /**
@@ -53,7 +53,7 @@ class MenuController extends Controller
      */
     public function edit($id)
     {
-        return view('menu::edit');
+        return view('menus::edit');
     }
 
     /**

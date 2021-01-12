@@ -1,11 +1,11 @@
-@extends('site.admin.index')
+@extends('admin.index')
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">
-        @component('site.admin.components.breadcrumb')
-            @slot('title') {{__('admin.edit')}} {{__('admin.item_menu')}} {{$item->title}}@endslot
+        @component('admin.components.breadcrumb')
+            @slot('title') {{__('admin.add')}} {{__('admin.item_menu')}} {{$menu->name}}@endslot
             @slot('parent') {{__('admin.home')}} @endslot
-            @slot('menu') {{__('admin.menus_site')}} @endslot
+            @slot('menus') {{__('admin.menus_site')}} @endslot
             @slot('active') {{__('admin.add')}}@endslot
         @endcomponent
 
@@ -16,8 +16,8 @@
     <section class="content card-body card">
         <!-- Small boxes (Stat box) -->
 
-        <form method="POST" action="{{route('site.admin.menu_items.update', $item->id)}}">
-            @method('PATCH')
+
+        <form method="POST" action="{{route('admin.menu_items.store')}}">
             @csrf
             <div class="row">
                 @forelse($locales as $locale)
@@ -58,13 +58,14 @@
                     </div>
                     <div class="parent_id form-group col-sm-3">
                         <label for="title">{{__('admin.parent')}}</label>
+
                         <select type="text" name="1" value="{{$item->parent_id}}"
                                 id="filter_id" class="form-control" placeholder="Выберите категорию" required>
                             <option value="null">{{__('admin.no_parent')}}</option>
                             @foreach($parentList as $parentOption)
+
                                 <option value="{{$parentOption->id}}"
-                                        @if($parentOption->id == $item->id) disabled="disabled" @endif
-                                        @if($parentOption->id == $item->parent_id && $parentOption->id != 1) selected @endif>
+                                        @if($parentOption->id == $item->parent_id) selected @endif>
 
                                     {{$parentOption->id_title}}
                                 </option>
@@ -86,7 +87,7 @@
                 >
                 <label for="status" class="form-check-label">{{__('Опубликованно')}}</label>
             </div>
-            <input type="hidden" name="menu_id" value="{{$item->menu_id}}">
+            <input type="hidden" name="menu_id" value="{{$menu->id}}">
             <button type="submit" class="btn btn-outline-success">{{__('Сохранить')}}</button>
         </form>
 

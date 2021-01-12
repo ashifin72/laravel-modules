@@ -1,9 +1,9 @@
-@extends('menu::layouts.master')
+@extends('menus')
 
 @section('content')
     <h1>Hello World</h1>
 
     <p>
-        This view is loaded from module: {!! config('menu.name') !!}
+        This view is loaded from module: {!! config('menus') !!}
     </p>
 @endsection

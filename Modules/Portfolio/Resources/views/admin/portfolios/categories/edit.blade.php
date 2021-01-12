@@ -1,11 +1,11 @@
-@extends('site.admin.index')
+@extends('admin.index')
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">
-        @component('site.admin.components.breadcrumb')
+        @component('admin.components.breadcrumb')
             @slot('title') {{$item->title}}@endslot
             @slot('parent') {{__('admin.home')}} @endslot
-            @slot('filters') {{__('admin.portfolio_filter')}} @endslot
+            @slot('filters') {{__('portfolio::admin.portfolio_categories')}} @endslot
             @slot('active') {{$item->title}}@endslot
         @endcomponent
 
@@ -17,7 +17,7 @@
         <!-- Small boxes (Stat box) -->
 
 
-        <form method="POST" action="{{route('site.admin.filters.update', $item->id)}}" enctype="multipart/form-data">
+        <form method="POST" action="{{route('admin.portfolio_categories.update', $item->id)}}" enctype="multipart/form-data">
             @method('PATCH')
             @csrf
             <div class="row">
@@ -74,8 +74,9 @@
                         <label for="title">URL</label>
                         <input type="text" name="slug" value="{{$item->slug}}"
                                id="title" class="form-control">
-
-
+                        <small id="emailHelp" class="form-text text-muted">
+                            {{__('admin.slug_generate')}}
+                        </small>
                     </div>
 
                     <div class="form-group">
@@ -93,7 +94,8 @@
                             @else <i class="fas fa-images"></i> {{__('Загрузить фото')}}
                             @endif
                         </label>
-                        <input type="text" name="img" readonly="readonly" onclick="openKCFinder(this)"
+                        <input type="text" name="img" readonly="readonly"
+                               placeholder="{{__('portfolio::admin.click-img')}}"
                                value="{{$item->img}}" class="form-control btn btn-outline-success"/>
 
                     </div>
@@ -102,7 +104,7 @@
 
         </form>
 
-        <form method="post" onsubmit='return false' action="{{route('site.admin.filters.destroy', $item->id)}}">
+        <form method="post" onsubmit='return false' action="{{route('admin.portfolio_categories.destroy', $item->id)}}">
             @method('DELETE')
             @csrf
             <div class="row justify-content-start ml-1" style="margin-top: 25px">

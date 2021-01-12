@@ -15,7 +15,7 @@ class MenuServiceProvider extends ServiceProvider
     /**
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'menu';
+    protected $moduleNameLower = 'menus';
 
     /**
      * Boot the application events.

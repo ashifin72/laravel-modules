@@ -24,6 +24,9 @@
                     <th>{{__('admin.photo_users')}}</th>
                     <th>{{__('E-mail')}}</th>
                     <th>{{__('admin.status')}}</th>
+                    <th>
+                        <a class="btn btn-outline-success float-right" href="{{route('admin.users.create')}}">{{__('Добавить')}}</a>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -50,17 +53,29 @@
                             <td>
                                 {{$item->role}}
                             </td>
-                            <td>
-                                <a class="btn btn-outline-primary" href="{{route('admin.users.edit', $item->id )}}">{{__('admin.edit')}}</a>
-                            </td>
-                            <td>
-                                <form method="post" onsubmit='return false' action="{{route('admin.users.destroy', $item->id)}}">
-                                    @method('DELETE')
+                            <td class="project-actions text-right">
+                                <a class="btn btn-primary btn-sm" href="#">
+                                    <i class="fas fa-folder">
+                                    </i>
+                                    View
+                                </a>
+                                <a class="btn btn-info btn-sm" href="{{route('admin.users.edit', $item->id)}}">
+                                    <i class="fas fa-pencil-alt">
+                                    </i>
+                                    Edit
+                                </a>
+                                <form
+                                    action="{{ route('admin.users.destroy', $item->id) }}"
+                                    method="post" class="float-right ml-2">
                                     @csrf
-                                    <div class="row justify-content-start">
-                                        <button type="submit" onclick=' confirm("Точно видалити?") ? this.form.submit() : ""' class="btn btn-outline-danger">{{__('admin.remove')}}</button>
-                                    </div>
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Подтвердите удаление')">
+                                        <i class="fas fa-trash">
+                                        </i>
+                                    </button>
                                 </form>
+
                             </td>
                         </tr>
                     @endif
@@ -71,21 +86,11 @@
             </table>
         </div>
 
-        <a class="btn btn-outline-success" href="{{route('admin.users.create')}}">{{__('Добавить')}}</a>
 
-    </section>
-    @if($items->total() > $items->count())
-        <br>
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <p>{{count($items)}} {{__('admin.entries_from')}} {{$items->total()}} </p>
-                        {{$items->links()}}
-                    </div>
-                </div>
-            </div>
+
+        <div class="card card-footer clearfix admin-paginate">
+            {{ $items->links() }}
         </div>
+    </section>
 
-    @endif
 @endsection

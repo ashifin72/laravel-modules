@@ -767,14 +767,14 @@
       LI: '.nav-item',
       LINK: '.nav-link',
       TREEVIEW_MENU: '.nav-treeview',
-      OPEN: '.menu-open',
+      OPEN: '.menus-open',
       DATA_WIDGET: '[data-widget="treeview"]'
     };
     var ClassName = {
       LI: 'nav-item',
       LINK: 'nav-link',
       TREEVIEW_MENU: 'nav-treeview',
-      OPEN: 'menu-open',
+      OPEN: 'menus-open',
       SIDEBAR_COLLAPSED: 'sidebar-collapse'
     };
     var Default = {
@@ -1550,13 +1550,13 @@
     var JQUERY_NO_CONFLICT = $.fn[NAME];
     var Selector = {
       NAVBAR: '.navbar',
-      DROPDOWN_MENU: '.dropdown-menu',
-      DROPDOWN_MENU_ACTIVE: '.dropdown-menu.show',
+      DROPDOWN_MENU: '.dropdown-menus',
+      DROPDOWN_MENU_ACTIVE: '.dropdown-menus.show',
       DROPDOWN_TOGGLE: '[data-toggle="dropdown"]'
     };
     var ClassName = {
       DROPDOWN_HOVER: 'dropdown-hover',
-      DROPDOWN_RIGHT: 'dropdown-menu-right'
+      DROPDOWN_RIGHT: 'dropdown-menus-right'
     };
     var Default = {};
     /**
@@ -1577,7 +1577,7 @@
         this._element.siblings().show().toggleClass("show");
 
         if (!this._element.next().hasClass('show')) {
-          this._element.parents('.dropdown-menu').first().find('.show').removeClass("show").hide();
+          this._element.parents('.dropdown-menus').first().find('.show').removeClass("show").hide();
         }
 
         this._element.parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {

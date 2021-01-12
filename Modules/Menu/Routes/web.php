@@ -22,9 +22,9 @@ Route::group(['middleware' => ['role:admin', 'auth']], function() {    // Admin
             Route::resource('menus', 'AdminMenuController')
                 ->except('show')
                 ->names('admin.menus');
-            Route::resource('munuitems', 'AdminMenuItemController')
-                ->except('show')
-                ->names('admin.munuitems');
+            Route::resource('menu-items', 'AdminMenuItemController')
+                ->except('show', 'index')
+                ->names('admin.menu_items');
         });
     });
 

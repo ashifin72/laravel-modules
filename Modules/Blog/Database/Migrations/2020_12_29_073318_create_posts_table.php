@@ -40,7 +40,7 @@ class CreatePostsTable extends Migration
             $table->text('video')->nullable();
             $table->text('description_soc')->nullable();
 
-            $table->enum('status',['0','1'])->default(1);
+            $table->enum('status',['0','1','2'])->default(1);
             $table->integer('sort')->default(1);
 
             $table->timestamps();

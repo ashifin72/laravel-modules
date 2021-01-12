@@ -7,13 +7,13 @@
         <title>Module Menu</title>
 
        {{-- Laravel Mix - CSS File --}}
-       {{-- <link rel="stylesheet" href="{{ mix('css/menu.css') }}"> --}}
+       {{-- <link rel="stylesheet" href="{{ mix('css/menus.css') }}"> --}}
 
     </head>
     <body>
         @yield('content')
 
         {{-- Laravel Mix - JS File --}}
-        {{-- <script src="{{ mix('js/menu.js') }}"></script> --}}
+        {{-- <script src="{{ mix('js/menus.js') }}"></script> --}}
     </body>
 </html>

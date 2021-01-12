@@ -87,39 +87,39 @@
                         </li>
 
                     </ul>
-{{--                </li>--}}
-{{--                <li class="nav-item has-treeview">--}}
-{{--                    <a href="#" class="nav-link">--}}
-{{--                        <i class="nav-icon fas fa-bars"></i>--}}
-{{--                        <p>--}}
-{{--                            {{__('admin.portfolio')}}--}}
-{{--                            <i class="right fas fa-angle-left"></i>--}}
-{{--                        </p>--}}
-{{--                    </a>--}}
-{{--                    <ul class="nav nav-treeview">--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="{{route('admin.portfolios.index')}}" class="nav-link">--}}
-{{--                                <i class="far fa-circle nav-icon"></i>--}}
-{{--                                <p>{{__('admin.portfolio_article')}}</p>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="{{route('admin.filters.index')}}" class="nav-link">--}}
-{{--                                <i class="far fa-circle nav-icon"></i>--}}
-{{--                                <p>{{__('admin.portfolio_filter')}}</p>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="{{route('admin.feedback.index')}}" class="nav-link">--}}
-{{--                                <i class="far fa-circle nav-icon"></i>--}}
-{{--                                <p>{{__('admin.feedback')}}</p>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-bars"></i>
+                        <p>
+                            {{__('portfolio::admin.portfolio')}}
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('admin.portfolios.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{__('portfolio::admin.portfolio_article')}}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.portfolio_categories.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{__('portfolio::admin.portfolio_categories')}}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.portfolio_feedback.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{__('portfolio::admin.feedback')}}</p>
+                            </a>
+                        </li>
 
-{{--                    </ul>--}}
-{{--                </li>--}}
+                    </ul>
+                </li>
                 <li class="nav-item">
-                    <a href=""class="nav-link">
+                    <a href="{{route('admin.sections.index')}}" class="nav-link">
                         <i class="nav-icon fa fa-address-card text-info"></i>
                         <p>{{ __('admin.sections') }}</p>
                     </a>
@@ -144,7 +144,7 @@
                 </li>
             </ul>
         </nav>
-        <!-- /.sidebar-menu -->
+        <!-- /.sidebar-menus -->
     </div>
     <!-- /.sidebar -->
 </aside>

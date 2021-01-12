@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
         $user1 = new User();
         $user1->name = 'Fedor Ashifin';
         $user1->email = 'a@a.com';
+        $user1->img = 'images/users/users4/mgtuAqIz1Xm0xbQnq0d73pglJxGyMh2RqWUlpFPF.jpg';
         $user1->password = bcrypt(123456789);
         $user1->save();
         $user1->roles()->attach($developer);

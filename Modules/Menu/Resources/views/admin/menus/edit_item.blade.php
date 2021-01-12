@@ -2,10 +2,10 @@
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">
-        @component('site.admin.components.breadcrumb')
-            @slot('title') {{__('admin.add')}} {{__('admin.item_menu')}} {{$menu->name}}@endslot
+        @component('admin.components.breadcrumb')
+            @slot('title') {{__('admin.edit')}} {{__('admin.item_menu')}} {{$item->title}}@endslot
             @slot('parent') {{__('admin.home')}} @endslot
-            @slot('menu') {{__('admin.menus_site')}} @endslot
+            @slot('menus') {{__('admin.menus_site')}} @endslot
             @slot('active') {{__('admin.add')}}@endslot
         @endcomponent
 
@@ -16,8 +16,8 @@
     <section class="content card-body card">
         <!-- Small boxes (Stat box) -->
 
-
-        <form method="POST" action="{{route('site.admin.menu_items.store')}}">
+        <form method="POST" action="{{route('site.admin.menu_items.update', $item->id)}}">
+            @method('PATCH')
             @csrf
             <div class="row">
                 @forelse($locales as $locale)
@@ -63,8 +63,9 @@
                             <option value="null">{{__('admin.no_parent')}}</option>
                             @foreach($parentList as $parentOption)
                                 <option value="{{$parentOption->id}}"
-                                        @if($parentOption->id == $item->parent_id) selected @endif>
-                                    {{--                                        {{$categoryOption->id}}. {{$categoryOption->title}}--}}
+                                        @if($parentOption->id == $item->id) disabled="disabled" @endif
+                                        @if($parentOption->id == $item->parent_id && $parentOption->id != 1) selected @endif>
+
                                     {{$parentOption->id_title}}
                                 </option>
                             @endforeach
@@ -85,7 +86,7 @@
                 >
                 <label for="status" class="form-check-label">{{__('Опубликованно')}}</label>
             </div>
-            <input type="hidden" name="menu_id" value="{{$menu->id}}">
+            <input type="hidden" name="menu_id" value="{{$item->menu_id}}">
             <button type="submit" class="btn btn-outline-success">{{__('Сохранить')}}</button>
         </form>
 

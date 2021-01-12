@@ -20,8 +20,8 @@
                 @if (isset($sections))
                     <li><a href="{{route('admin.sections.index')}}"><i></i>{{$sections}}</a></li>
                 @endif
-                @if (isset($menu))
-                    <li><a href="{{route('admin.menu.index')}}"><i></i>{{$menu}}</a></li>
+                @if (isset($menus))
+                    <li><a href="{{route('admin.menus.index')}}"><i></i>{{$menus}}</a></li>
                 @endif
                 @if (isset($info))
                     <li><a href="{{route('admin.info.index')}}"><i></i>{{$info}}</a></li>
@@ -45,13 +45,13 @@
                     <li><a href="{{route('admin.comments.index')}}"><i></i>{{$comments}}</a></li>
                 @endif
                 @if (isset($filters))
-                    <li><a href="{{route('admin.filters.index')}}"><i></i>{{$filters}}</a></li>
+                    <li><a href="{{route('admin.portfolio_categories.index')}}"><i></i>{{$filters}}</a></li>
                 @endif
                 @if (isset($portfolios))
                     <li><a href="{{route('admin.portfolios.index')}}"><i></i>{{$portfolios}}</a></li>
                 @endif
                 @if (isset($feedback))
-                    <li><a href="{{route('admin.feedback.index')}}"><i></i>{{$feedback}}</a></li>
+                    <li><a href="{{route('admin.portfolio_feedback.index')}}"><i></i>{{$feedback}}</a></li>
                 @endif
                 @if (isset($tags))
                     <li><a href="{{route('admin.tags.index')}}"><i></i>{{$tags}}</a></li>

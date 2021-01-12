@@ -9,6 +9,8 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Menu\Entities\Menu;
+use Modules\Menu\Http\Requests\MenuRequest;
+use Modules\Menu\Http\Requests\UpdateMenuRequest;
 use Modules\Menu\Repositories\MenuItemRepository;
 use Modules\Menu\Repositories\MenuRepository;
 
@@ -36,7 +38,7 @@ class AdminMenuController extends AdminBaseController
     public function index()
     {
         $items = $this->menuRepository->getAllWithMenuPaginate();
-        return view('menu::admin.menus.index', compact('items'));
+        return view('menus::admin.menus.index', compact('items'));
     }
 
     /**
@@ -48,8 +50,7 @@ class AdminMenuController extends AdminBaseController
     {
         $item = Menu::make();
 
-
-        return view('menu::admin.menus.create', compact('item'));
+        return view('menus::admin.menus.create', compact('item'));
     }
 
     /**
@@ -65,7 +66,7 @@ class AdminMenuController extends AdminBaseController
         $item = Menu::create($data);
 
         return $this->menuRepository
-            ->resultRecording($item, 'menu::admin.menus.index');
+            ->resultRecording($item, 'admin.menus.index');
 
     }
 
@@ -85,7 +86,8 @@ class AdminMenuController extends AdminBaseController
         }
         $menuItems = $this->menuItemRepository->getAllWithMenuItem($perPage = null, $id);
 
-        return view('menu::admin.menus.edit',
+
+        return view('menus::admin.menus.edit',
             compact('item', 'menuItems'));
     }
 
@@ -96,7 +98,7 @@ class AdminMenuController extends AdminBaseController
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(MenuRequest $request, $id)
+    public function update(UpdateMenuRequest $request, $id)
     {
 
         $item = $this->menuRepository->getEditId($id);
@@ -108,7 +110,7 @@ class AdminMenuController extends AdminBaseController
             ->fill($data)
             ->save();
         return $this->menuRepository
-            ->resultRecording($result, 'admin.menu.edit', $item->id);
+            ->resultRecording($result, 'admin.menus.edit', $item->id);
 
     }
 
@@ -120,16 +122,18 @@ class AdminMenuController extends AdminBaseController
      */
     public function destroy($id)
     {
-        $result = Menu::destroy($id);
-        // Полное удаление
-//        $result = BlogPost::find(id)->forceDelete();
+        $menuItems = $this->menuItemRepository->getAllWithMenuItem($perPage = null, $id);
 
-        if ($result) {
-            return redirect()
-                ->route('admin.menu.index')
-                ->with(['success' => "запись $id удалена"]);
-        } else {
-            return back()->withErrors(['msg' => 'Ошибка удаления']);
+        if ($menuItems->isEmpty()){
+            $result = Menu::destroy($id);
+            if ($result) {
+                return redirect()
+                    ->route('admin.menus.index')
+                    ->with(['success' => "запись $id удалена"]);
+            } else {
+                return back()->withErrors(['msg' => __('admin.error_delete')]);
+            }
+        }else{
+            return back()->withErrors(['msg' => __('menus.eroror-delit_menu')]);
         }
-    }
-}
+    }}

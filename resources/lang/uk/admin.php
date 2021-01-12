@@ -19,7 +19,7 @@ return [
     'content_home' => 'Контент головної',
     'top_menu' => 'ТОП Меню',
     'menus_site' => 'Меню проекту',
-    'menu' => 'пункт меню',
+    'menus' => 'пункт меню',
     'article_blog' => 'Статті Блогу',
     'categories_blog' => 'Категорії Блогу',
     'category' => 'Категорія',

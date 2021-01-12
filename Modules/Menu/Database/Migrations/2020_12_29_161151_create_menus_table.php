@@ -14,9 +14,12 @@ class CreateMenusTable extends Migration
     public function up()
     {
         Schema::create('menus', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
-
+            $table->string('name')->nullable();
+            $table->enum('status',['0','1'])->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

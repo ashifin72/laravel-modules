@@ -176,6 +176,7 @@
                         <input type="text" name="img" readonly="readonly" onclick="openKCFinder(this)"
                                value="{{$item->img}}" class="form-control button-kcfinder  btn btn-outline-success"
                                style="cursor:pointer"
+                               placeholder="{{__('portfolio::admin.click-img')}}"
                                id="ckfinder-input-1"/>
                     </div>
                     <div class="form-group  admin__img-block">
@@ -188,6 +189,7 @@
 
                         <input type="text" name="img_footer" readonly="readonly"
                                value="{{$item->img_footer}}"
+                               placeholder="{{__('portfolio::admin.click-img')}}"
                                class="form-control button-kcfinder  btn btn-outline-success" style="cursor:pointer"
                                id="ckfinder-input-2"/>
                     </div>

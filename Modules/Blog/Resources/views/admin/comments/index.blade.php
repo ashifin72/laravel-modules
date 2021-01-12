@@ -36,7 +36,7 @@
                             <td>
                                 @if ($item->status == 1)
                                     <span class="alert alert-primary"><i class="fab fa-creative-commons-share"></i></span>
-                                @else <span class="alert alert-danger"><i class="far fa-bell-slash"></i></span>
+                                @else <span class="alert alert-default-danger"><i class="far fa-bell-slash"></i></span>
                                 @endif
                             </td>
 
@@ -84,17 +84,9 @@
             </table>
         </div>
 
-
-    </section>
-    @if ($items->total() > $items->count())
-
-        <div class="row justify-content-center">
-            <div class="col-auto card">
-                <div class="card-body">
-                    <p>{{count($items)}} {{__('admin.entries_from')}} {{$items->total()}} </p>
-                    {{$items->links()}}
-                </div>
-            </div>
+        <div class="card card-footer clearfix admin-paginate">
+            {{ $items->links() }}
         </div>
-    @endif
+    </section>
+
 @endsection

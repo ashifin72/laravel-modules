@@ -60,9 +60,12 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="slug">URL {{__('admin.slug_generate')}}</label>
+                        <label for="slug">URL </label>
                         <input type="text" name="slug" value="{{$item->slug}}"
                                id="slug" class="form-control">
+                        <small id="emailHelp" class="form-text text-muted">
+                            {{__('admin.slug_generate')}}
+                        </small>
                     </div>
                     <div class="form-group">
                         <label for="title">{{__('admin.sort')}}</label>

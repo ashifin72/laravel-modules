@@ -1,11 +1,11 @@
-@extends('site.admin.index')
+@extends('admin.index')
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">
-        @component('site.admin.components.breadcrumb')
+        @component('admin.components.breadcrumb')
             @slot('title') {{$item->title}}@endslot
             @slot('parent') {{__('admin.home')}} @endslot
-            @slot('portfolios') {{__('admin.portfolio')}} @endslot
+            @slot('portfolios') {{__('portfolio::admin.portfolio')}} @endslot
             @slot('active') {{$item->title}}@endslot
         @endcomponent
 
@@ -17,7 +17,7 @@
         <!-- Small boxes (Stat box) -->
 
 
-        <form method="POST" action="{{route('site.admin.portfolios.update', $item->id)}}" enctype="multipart/form-data">
+        <form method="POST" action="{{route('admin.portfolios.update', $item->id)}}" enctype="multipart/form-data">
             @method('PATCH')
             @csrf
             <input type="hidden" name="id" value="{{$item->id}}">
@@ -60,14 +60,15 @@
                                         </div>
                                         <div class="form-group">
 
-                                            <label for="title">{{__('admin.customer')}} {{$locale->local}}</label>
+                                            <label for="title">{{__('portfolio::admin.customer')}} {{$locale->local}}</label>
 
                                             <input type="text" name="{{$customer}}" value="{{$item->$customer}}"
                                                    id="title" class="form-control" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="title">{{__('admin.text')}} {{$locale->local}}</label>
-                                            <textarea class="form-control" id="editor{{$loop->iteration}}" rows="10"
+                                            <textarea class="form-control content-editor_{{$locale->local}}"
+                                                      id="editor{{$loop->iteration}}" rows="10"
                                                       name="{{$content}}">
                                 {{ $item->$content}}
                                     </textarea>
@@ -109,18 +110,18 @@
                 </div>
                 <div class="col-sm-4">
                     @if($item->status == 1)
-                        <div class="alert alert-success" role="alert">
+                        <div class="alert alert-default-success" role="alert">
                             {{__('admin.is_published')}}
                         </div>
                     @else
-                        <div class="alert alert-danger" role="alert">
+                        <div class="alert alert-default-danger" role="alert">
                             {{__('admin.disabled')}}
                         </div>
 
                     @endif
-                        <div class="alert alert-default-dark" role="alert">
-                            <a href="{{route('portfolio.show', $item->slug)}}">{{__('admin.look_article')}}</a>
-                        </div>
+                    <div class="alert alert-default-dark" role="alert">
+                        <a href="">{{__('admin.look_article')}}</a>
+                    </div>
 
                     <div class="form-group">
                         <label for="title">URL</label>
@@ -130,23 +131,24 @@
 
                     </div>
 
-                        <div class="parent_id form-group">
-                            <label for="title">{{__('admin.portfolio_filter')}}</label>
-                            <select type="text" name="filter_id" value="{{$item->filter_id}}"
-                                    id="filter_id" class="form-control" placeholder="Выберите категорию" required>
-                                @foreach($filterList as $filterOption)
-                                    <option value="{{$filterOption->id}}"
-                                            @if($filterOption->id == $item->filter_id) selected @endif>
-                                        {{--                                        {{$categoryOption->id}}. {{$categoryOption->title}}--}}
-                                        {{$filterOption->id_title}}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+                    <div class="parent_id form-group">
+                        <label for="title">{{__('portfolio::admin.portfolio_category')}}</label>
+                        <select type="text" name="portfolio_categories_id" value="{{$item->filter_id}}"
+                                id="portfolio_categories_id" class="form-control" placeholder="Выберите категорию"
+                                required>
+                            @foreach($categoryList as $categoryOption)
+                                <option value="{{$categoryOption->id}}"
+                                        @if($categoryOption->id == $item->filter_id) selected @endif>
+
+                                    {{$categoryOption->id_title}}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
 
                     <div class="form-group">
                         <label for="title">{{__('admin.sort')}}</label>
-                        <input type="number" min="1" max="10" name="sort" value="{{$item->sort}}"
+                        <input type="number" min="1" max="10" name="sort" value="{{$item->sort ?? 1}}"
                                id="local" class="form-control" required>
                     </div>
                     <div class="form-group">
@@ -155,47 +157,49 @@
                                                                alt="{{$item->title}}">
 
 
-                            {{__('admin.replace_photo')}}
+                            {{__('portfolio::admin.replace_photo')}}
                             @else <i class="fas fa-images"></i> {{__('admin.download')}}
                             @endif
                         </label>
-                        <input type="text" name="img" readonly="readonly" onclick="openKCFinder(this)"
+                        <input type="text" name="img" readonly="readonly"
+                               id="ckfinder-input-1"
                                value="{{$item->img}}" class="form-control btn btn-outline-success"/>
 
                     </div>
-                        <div class="form-group">
-                            <label for="title">URL {{__('admin.project_s')}}</label>
-                            <input type="text" name="url_site" value="{{$item->url_site}}"
-                                   id="url_site" class="form-control">
+                    <div class="form-group">
+                        <label for="title">URL {{__('portfolio::admin.project_s')}}</label>
+                        <input type="text" name="url_site" value="{{$item->url_site}}"
+                               id="url_site" class="form-control">
 
-                        </div>
-                        <div class="form-group">
-                            <label for="title">CMS {{__('admin.project_s')}}</label>
-                            <input type="text" name="cms_site" value="{{$item->cms_site}}"
-                                   id="cms_site" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">CMS {{__('portfolio::admin.project_s')}}</label>
+                        <input type="text" name="cms_site" value="{{$item->cms_site}}"
+                               id="cms_site" class="form-control">
 
-                        </div>
-                        <div class="form-group">
-                            <label for="title">{{__('admin.time_site')}} {{__('admin.project_s')}}</label>
-                            <input type="int" name="time_site" value="{{$item->time_site}}"
-                                   id="cms_site" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label
+                            for="title">{{__('portfolio::admin.time_site')}} {{__('portfolio::admin.project_s')}}</label>
+                        <input type="int" name="time_site" value="{{$item->time_site}}"
+                               id="cms_site" class="form-control">
 
-                        </div>
-                        <div class="form-group">
-                            <label for="title">{{__('admin.created_at')}} {{$item->created_at}}</label>
-                            <input type="date" name="created_at" class="form-control mydate" value="{{$item->created_at}}" >
-                        </div>
-                        <div class="form-group">
-                            <label for="title">{{__('admin.update_at')}} {{$item->updated_at}}</label>
-                            <input type="date" name="updated_at" class="form-control mydate" value="{{$item->updated_at}}" >
-                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">{{__('admin.created_at')}} {{$item->created_at}}</label>
+                        <input type="date" name="created_at" class="form-control mydate" value="{{$item->created_at}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">{{__('admin.update_at')}} {{$item->updated_at}}</label>
+                        <input type="date" name="updated_at" class="form-control mydate" value="{{$item->updated_at}}">
+                    </div>
 
                 </div>
             </div>
 
         </form>
 
-        <form method="post" onsubmit='return false' action="{{route('site.admin.portfolios.destroy', $item->id)}}">
+        <form method="post" onsubmit='return false' action="{{route('admin.portfolios.destroy', $item->id)}}">
             @method('DELETE')
             @csrf
             <div class="row justify-content-start ml-1" style="margin-top: 25px">

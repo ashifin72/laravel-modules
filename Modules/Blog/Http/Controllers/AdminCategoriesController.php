@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminBaseController;
 
 use MetaTag;
 use Modules\Blog\Entities\Category;
+use Modules\Blog\Entities\Post;
 use Modules\Blog\Http\Requests\BlogCategoryGreateRequest;
 use App\Models\locale;
 
@@ -115,6 +116,10 @@ class AdminCategoriesController extends AdminBaseController
 
     public function destroy($id)
     {
+        $post = Post::where('category_id', '=', $id);
+        if (count($post)){
+            return back()->withErrors(['msg'=> __('admin.error_isset_date')]);
+        }
         $result = Category::destroy($id);
         if ($result) {
             return redirect()

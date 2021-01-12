@@ -47,7 +47,7 @@
                             <td>
                                 <form action="{{route('admin.menu_items.create')}}" method="get">
                                     <input type="hidden" name="menu_id" value="{{$item->id}}">
-                                <button type="submit" class="btn btn-outline-success" >{{__('admin.add')}} {{__('admin.menu')}}</button>
+                                <button type="submit" class="btn btn-outline-success" >{{__('admin.add')}} {{__('admin.item_menu')}}</button>
                                 </form>
                             </td>
                         </tr>

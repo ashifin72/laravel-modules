@@ -1,11 +1,11 @@
-@extends('site.admin.index')
+@extends('admin.index')
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">
-        @component('site.admin.components.breadcrumb')
+        @component('admin.components.breadcrumb')
             @slot('title') {{$item->name}}@endslot
             @slot('parent') {{__('admin.home')}} @endslot
-            @slot('menu') {{__('admin.menus_site')}} @endslot
+            @slot('menus') {{__('admin.menus_site')}} @endslot
             @slot('active') {{$item->name}}@endslot
         @endcomponent
 
@@ -16,20 +16,22 @@
     <section class="content card card-body">
         <!-- Small boxes (Stat box) -->
 
-    @php $menu_id = $item->id  @endphp
+    @php $menu_id = $item->id ?? null @endphp
+
         <div class="row">
             <div class="col-sm-10">
-                <form method="POST" action="{{route('site.admin.menu.update', $item->id)}}">
+                <form method="POST" action="{{route('admin.menus.update', $item->id)}}">
                     @method('PATCH')
                     @csrf
                     <div class="row">
                         <div class="form-group col-sm-6">
-                            <label for="title">{{__('Название')}}</label>
+                            <label for="title">{{__('admin.name')}}</label>
                             <input type="text" name="name" value="{{$item->name}}"
                                    id="name" class="form-control" required>
                         </div>
                         <div class="form_check col-sm-2" style="margin-top: 40px">
                             <input type="hidden" name="status" value="0">
+
 
                             <input type="checkbox"
                                    name="status"
@@ -41,6 +43,7 @@
                             >
                             <label for="status" class="form-check-label">{{__('Опубликованно')}}</label>
                         </div>
+                        <input type="hidden" name="id" value="{{$item->id}}">
                         <div class="col-sm-4" style="margin-top: 34px">
                             <button type="submit" class="btn btn-outline-success">{{__('Сохранить')}}</button>
                         </div>
@@ -49,7 +52,7 @@
             </div>
             <div class="col-sm-2">
                 @if($item->id)
-                    <form method="post" onsubmit='return false' action="{{route('site.admin.menu.destroy', $item->id)}}">
+                    <form method="post" onsubmit='return false' action="{{route('admin.menus.destroy', $item->id)}}">
                         @method('DELETE')
                         @csrf
                         <div class="row justify-content-start" style="margin-top: 34px">
@@ -86,10 +89,10 @@
                     </td>
 
                     <td>
-                        <a class="btn btn-outline-success" href="{{route('site.admin.menu_items.edit', $item->id )}}">{{__('admin.edit')}}</a>
+                        <a class="btn btn-outline-success" href="{{route('admin.menu_items.edit', $item->id )}}">{{__('admin.edit')}}</a>
                     </td>
                     <td>
-                        <form method="post" onsubmit='return false' action="{{route('site.admin.menu_items.destroy', $item->id)}}">
+                        <form method="post" onsubmit='return false' action="{{route('admin.menu_items.destroy', $item->id)}}">
                             @method('DELETE')
                             @csrf
                             <div class="row justify-content-start">
@@ -109,9 +112,9 @@
             <tr>
 
                 <td colspan="6">
-                    <form action="{{route('site.admin.menu_items.create')}}" method="get">
+                    <form action="{{route('admin.menu_items.create')}}" method="get">
                         <input type="hidden" name="menu_id" value="{{$menu_id}}">
-                        <button type="submit" class="btn btn-outline-success" >{{__('admin.add')}} {{__('admin.menu')}}</button>
+                        <button type="submit" class="btn btn-outline-success" >{{__('admin.add')}} {{__('admin.item_menu')}}</button>
                     </form>
                 </td>
 

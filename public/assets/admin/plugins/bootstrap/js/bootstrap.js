@@ -1618,16 +1618,16 @@
     DROPUP: 'dropup',
     DROPRIGHT: 'dropright',
     DROPLEFT: 'dropleft',
-    MENURIGHT: 'dropdown-menu-right',
-    MENULEFT: 'dropdown-menu-left',
+    MENURIGHT: 'dropdown-menus-right',
+    MENULEFT: 'dropdown-menus-left',
     POSITION_STATIC: 'position-static'
   };
   var Selector$4 = {
     DATA_TOGGLE: '[data-toggle="dropdown"]',
     FORM_CHILD: '.dropdown form',
-    MENU: '.dropdown-menu',
+    MENU: '.dropdown-menus',
     NAVBAR_NAV: '.navbar-nav',
-    VISIBLE_ITEMS: '.dropdown-menu .dropdown-item:not(.disabled):not(:disabled)'
+    VISIBLE_ITEMS: '.dropdown-menus .dropdown-item:not(.disabled):not(:disabled)'
   };
   var AttachmentMap = {
     TOP: 'top-start',
@@ -1737,7 +1737,7 @@
             referenceElement = this._config.reference[0];
           }
         } // If boundary is not `scrollParent`, then set position to `static`
-        // to allow the menu to "escape" the scroll parent's boundaries
+        // to allow the menus to "escape" the scroll parent's boundaries
         // https://github.com/twbs/bootstrap/issues/24251
 
 
@@ -2004,7 +2004,7 @@
       //  - If space key => not a dropdown command
       //  - If key is other than escape
       //    - If key is not up or down => not a dropdown command
-      //    - If trigger inside the menu => not a dropdown command
+      //    - If trigger inside the menus => not a dropdown command
       if (/input|textarea/i.test(event.target.tagName) ? event.which === SPACE_KEYCODE || event.which !== ESCAPE_KEYCODE && (event.which !== ARROW_DOWN_KEYCODE && event.which !== ARROW_UP_KEYCODE || $(event.target).closest(Selector$4.MENU).length) : !REGEXP_KEYDOWN.test(event.which)) {
         return;
       }
@@ -3771,7 +3771,7 @@
   };
   var ClassName$8 = {
     DROPDOWN_ITEM: 'dropdown-item',
-    DROPDOWN_MENU: 'dropdown-menu',
+    DROPDOWN_MENU: 'dropdown-menus',
     ACTIVE: 'active'
   };
   var Selector$8 = {
@@ -4068,7 +4068,7 @@
     CLICK_DATA_API: "click" + EVENT_KEY$9 + DATA_API_KEY$7
   };
   var ClassName$9 = {
-    DROPDOWN_MENU: 'dropdown-menu',
+    DROPDOWN_MENU: 'dropdown-menus',
     ACTIVE: 'active',
     DISABLED: 'disabled',
     FADE: 'fade',
@@ -4081,7 +4081,7 @@
     ACTIVE_UL: '> li > .active',
     DATA_TOGGLE: '[data-toggle="tab"], [data-toggle="pill"], [data-toggle="list"]',
     DROPDOWN_TOGGLE: '.dropdown-toggle',
-    DROPDOWN_ACTIVE_CHILD: '> .dropdown-menu .active'
+    DROPDOWN_ACTIVE_CHILD: '> .dropdown-menus .active'
   };
   /**
    * ------------------------------------------------------------------------

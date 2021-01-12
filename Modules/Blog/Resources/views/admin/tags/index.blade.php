@@ -2,9 +2,7 @@
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">
-        <a class="btn btn-outline-success btn-add"
-           href="{{route('admin.tags.create')}}">{{__('admin.add_article')}}
-        </a>
+
         @component('admin.components.breadcrumb')
             @slot('title') {{__('blog.tags')}} @endslot
 
@@ -26,6 +24,11 @@
                     <th>ID</th>
                     <th>{{__('admin.name')}}</th>
                     <th>{{__('admin.slug')}}</th>
+                    <th>
+                        <a class="btn btn-outline-success btn-add"
+                           href="{{route('admin.tags.create')}}">{{__('admin.add_article')}}
+                        </a>
+                    </th>
 
                 </tr>
                 </thead>
@@ -38,21 +41,20 @@
                             <td>{{$item->title}}</td>
                             <td>{{$item->slug}}</td>
                             <td>
-                                <a class="btn btn-outline-success"
-                                   href="{{route('admin.tags.edit', $item->id )}}">
-                                    <i class="fas fa-pencil-alt"></i>
+                                <a class="btn btn-info btn-sm" href="{{route('admin.tags.edit', $item->id)}}">
+                                    <i class="fas fa-pencil-alt">
+                                    </i>
+                                    Edit
                                 </a>
-
-                            </td>
-                            <td>
                                 <form
                                     action="{{ route('admin.tags.destroy', $item->id) }}"
-                                    method="post" class="float-left">
+                                    method="post" class="float-right ml-2">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-danger btn-sm"
+                                    <button type="submit" class="btn btn-danger btn-sm"
                                             onclick="return confirm('Подтвердите удаление')">
-                                        <i class="fas fa-trash-alt"></i>
+                                        <i class="fas fa-trash">
+                                        </i>
                                     </button>
                                 </form>
                             </td>
@@ -66,23 +68,11 @@
             </table>
         </div>
 
-
+        <div class="card card-footer clearfix admin-paginate">
+            {{ $items->links() }}
+        </div>
     </section>
 
-    @if($items->total() > $items->count())
 
-        <br>
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <p>{{count($items)}} {{__('admin.entries_from')}} {{$items->total()}} </p>
-                        {{$items->links()}}
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    @endif
 
 @endsection
