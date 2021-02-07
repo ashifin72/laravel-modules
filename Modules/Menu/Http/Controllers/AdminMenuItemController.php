@@ -3,7 +3,7 @@
 namespace Modules\Menu\Http\Controllers;
 
 use App\Http\Controllers\Admin\AdminBaseController;
-use App\Models\locale;
+use App\Models\Locale;
 use App\Repositories\Admin\LocalRepository;
 
 use Illuminate\Contracts\Support\Renderable;

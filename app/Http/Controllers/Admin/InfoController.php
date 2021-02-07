@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InfoUpdateRequest;
 
-use App\Models\locale;
+use App\Models\Locale;
 use App\Repositories\Admin\InfoRepository;
 use App\Repositories\Admin\LocalRepository;
 use Illuminate\Http\Request;

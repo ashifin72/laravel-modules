@@ -9,7 +9,7 @@ use MetaTag;
 use Modules\Blog\Entities\Category;
 use Modules\Blog\Entities\Post;
 use Modules\Blog\Http\Requests\BlogCategoryGreateRequest;
-use App\Models\locale;
+use App\Models\Locale;
 
 use App\Repositories\Admin\LocalRepository;
 use Illuminate\Contracts\Support\Renderable;

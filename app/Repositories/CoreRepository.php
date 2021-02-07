@@ -8,7 +8,7 @@
 
 namespace App\Repositories;
 
-use App\Models\locale;
+use App\Models\Locale;
 use Illuminate\Database\Eloquent\Model;
 use function PHPSTORM_META\elementType;
 

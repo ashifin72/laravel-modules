@@ -4,7 +4,7 @@ namespace Modules\Section\Http\Controllers;
 
 use App\Http\Controllers\Admin\AdminBaseController;
 use Modules\Section\Http\Requests\SectionRequest;
-use App\Models\locale;
+use App\Models\Locale;
 use App\Repositories\Admin\LocalRepository;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;

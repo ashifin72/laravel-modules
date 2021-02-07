@@ -4,7 +4,7 @@ namespace Modules\Section\Http\Controllers;
 
 use App\Http\Controllers\Admin\AdminBaseController;
 use App\Http\Requests\SectionItemGreateRequest;
-use App\Models\locale;
+use App\Models\Locale;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 

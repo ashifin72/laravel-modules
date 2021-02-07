@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\locale;
+use App\Models\Locale;
 use DB;
 use Illuminate\Database\Seeder;
 
